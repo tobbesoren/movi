@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 3em;
+    height: 3em;
+}
+  
+.shoppingCart {
+    height: 3em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+.shoppingCart:hover{
+    transform: scale(1.1);
+}
+  
+.productsCount {
+    z-index: 1;
+    font-size: 2em;
+    top: 38px;
+    color: orange;
+}
