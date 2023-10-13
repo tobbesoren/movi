@@ -1,6 +1,6 @@
 .menu-bar {
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
   height: 55px;
   overflow: hidden;
 }

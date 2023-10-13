@@ -12,16 +12,13 @@ export const routeTransitionSpring = {
   };
 
   export const routeTransitionSpringFromRight = {
-    initial: {
-      x: "100vw",
-    },
+    initial:{ x:"100vw"},
     final: {
-      x: "0vw",
-      transition: {
-        type: "spring",
-        mass: 0.4,
-        ease: [0.5, 0.71, 1, 1.5],
-      },
+        x:"0vw",
+        transition: {
+            duration: 0.3,
+            ease: [0.3, 0.51, 0.75, 1.0],
+        },
     },
   };
 
@@ -40,9 +37,9 @@ export const routeTransitionSpring = {
   };
 
   export const routeTransitionEase = {
-    initial:{ opacity: 0, scale: 0.5 },
+    initial:{ opacity: 0, scale: 1.0 },
     final: {
-        opacity: 1, scale: 1.0,
+        opacity: 1,
         transition: {
             duration: 0.3,
             ease: [0.3, 0.51, 0.75, 1.0],

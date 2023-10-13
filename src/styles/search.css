@@ -1,0 +1,34 @@
+.container-body-search{
+    height: 100vh;
+    overflow-y: scroll;
+   background-color: rgb(47, 54, 61);
+}
+
+.moviePoster {
+    width:200px;
+    object-fit: cover;
+}
+
+.previewImage{
+    width:200px;
+    object-fit: cover;
+}
+
+.content {
+    
+    margin-top: 50px;
+    display: flex;
+    flex: 1 0 0px;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+.preview {
+    border: solid black 2px;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.previewTitle {
+    width:200px;
+}

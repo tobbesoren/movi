@@ -6,7 +6,9 @@ export const CoorTransition = ({page,name,transition}) =>{
             initial="initial"
             animate="final"
             className={name}> 
+            <div className="container-body-base"> 
             {page()}
+            </div>
         </motion.div>
     )
 }

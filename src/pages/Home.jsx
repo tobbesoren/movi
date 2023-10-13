@@ -1,15 +1,17 @@
-import { CoorTransition } from "../components/CoorTransition";
 import '../styles/home.css';
+import { CoorTransition } from "../components/CoorTransition";
 import { routeTransitionEase } from "../helper/transitiontypes";
-import { BaseBody } from "../components/BaseBody";
+import AsyncImage from '../components/AsyncImage';
+import poster from "../assets/oppenheimer.jpg"
+
 
 const Home = () => {
-
-  
+ 
   const body = () =>{
     return(
-      <BaseBody>
-      </BaseBody>
+      <div className="container-body-home">
+          <AsyncImage className="poster" src={poster}></AsyncImage>
+      </div>
     )
   }
 

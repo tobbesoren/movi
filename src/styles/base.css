@@ -16,7 +16,6 @@
 
 .app{
   position: relative;
- 
 }
 
 .container-body-base{
@@ -26,4 +25,5 @@
   left:0;
   top:0;
   z-index: -1;
+
 }
