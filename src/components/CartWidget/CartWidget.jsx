@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import shoppingCart from "../assets/shopping-cart.svg"
-import "./shoppingCart.css"
+import shoppingCart from '../../assets/shopping-cart.svg'
+import "./CartWidget.css"
 
-export default function ShoppingCart({ productsCount }){
+export default function CartWidget({ productsCount }){
     const [productCountClass, setClassName] = useState("productsCountZero")
     
 

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import Search from './components/Search'
 
 import './App.css'
-import ShoppingCart from './components/shoppingCart'
+import CartWidget from './components/cartWidget/cartWidget'
+
 
 function App() {
   
@@ -10,7 +11,7 @@ function App() {
   return (
     <>
     <div>
-      <ShoppingCart></ShoppingCart>
+      <CartWidget></CartWidget>
       <Search></Search>
     </div>
       
