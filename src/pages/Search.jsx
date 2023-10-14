@@ -120,7 +120,7 @@ const Search = () => {
     }
 
     const handleScroll = e =>{
-        stringInterPolation(e.target.scrollTop,e.target.scrollHeight,e.target.clientHeight);
+        //stringInterPolation(e.target.scrollTop,e.target.scrollHeight,e.target.clientHeight);
         if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
             if (!isLoading) {
                 //nextPage();
@@ -132,11 +132,13 @@ const Search = () => {
   const body = () =>{
     return(
     <div className="container-body-search" onScroll={handleScroll}>
-       <input onKeyDown={handleEnter} type="text" value={searchFieldText} onChange={handleInput}></input>
+        <div className="container-search-field">
+            <input onKeyDown={handleEnter} type="text" value={searchFieldText} onChange={handleInput}></input>
             <button onClick={searchDataBase}>Search</button>
-            <div className="content">
-                {resultList}
-            </div>
+        </div>
+        <div className="content">
+            {resultList}
+        </div>
     </div>
     )
   }

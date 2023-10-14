@@ -1,7 +1,37 @@
 .container-body-search{
     height: 100vh;
     overflow-y: scroll;
-   background-color: rgb(47, 54, 61);
+     
+}
+
+.container-body-search h1{
+   text-align: center;
+   margin-top: 10px;
+   text-overflow: clip;
+}
+
+.container-search-field{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width:100%;
+    border-radius: 20px;
+    height: 30px;
+    margin-top: 60px;
+   
+}
+
+.container-search-field input{
+    border-radius: 10px;
+    width:80%;
+    height: 100%;
+    margin-right: 20px;
+}
+
+.container-search-field button{
+    border-radius: 10px;
+    height: 35px;
+    background-color: white;
 }
 
 .moviePoster {
@@ -15,8 +45,7 @@
 }
 
 .content {
-    
-    margin-top: 50px;
+    margin-top: 100px;
     display: flex;
     flex: 1 0 0px;
     flex-wrap:wrap;

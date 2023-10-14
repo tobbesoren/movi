@@ -1,8 +1,10 @@
 .menu-bar {
+  position: relative;
   -webkit-backdrop-filter: blur(0px);
   backdrop-filter: blur(0px);
   height: 55px;
   overflow: hidden;
+ 
 }
   
 .menu-bar a {
@@ -15,7 +17,10 @@
   text-decoration: inherit;
 }
 
-
+h1{
+  text-align: center;
+  margin-top: 0;
+}
   
 .menu-bar .icon {
   color: #f2f2f2;
@@ -77,4 +82,8 @@
   font-size: 20px;
   margin-right: 50px;
   color:white
+}
+
+.menu-bar .search-link-disabled{
+  display: none;
 }

@@ -15,7 +15,7 @@ import { AppContext,AppProvider } from "./components/AppContext";
 //import './App.css'
 import "./styles/base.css"
 
-const str = "/Movies/";
+const str = "/Search";
 const rgx = new RegExp(str);
 
 function LocationProvider({ children }) {
@@ -24,10 +24,10 @@ function LocationProvider({ children }) {
 
 function AppRoutes() {
   const location = useLocation();
-  const context = useContext(AppContext);
+  /*const context = useContext(AppContext);
   useEffect(() => {
     context.setHiddenMenu(rgx.test(location.pathname)); 
-  },[location])
+  },[location])*/
 
   return (
     <Routes location={location} key="default">
