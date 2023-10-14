@@ -7,7 +7,6 @@ import {useLoader} from "../components/LoaderContext"
 import { stringInterPolation } from '../helper/functions';
 
 const Search = () => {
-    const {startLoader, stopLoader} = useLoader();
     const [searchFieldText, setSearchFieldText] = useState('');
     const [resultList, setResultList] = useState([]);
 
@@ -44,10 +43,8 @@ const Search = () => {
         console.log('Hi!')
         if (currentPage <= totalPages) {
             isLoading = true;
-            startLoader();
             const movieList = await fetchData(searchString);
             setResultList(resultList => [...resultList, movieList]);
-            stopLoader();
             isLoading = false;
         }
     }

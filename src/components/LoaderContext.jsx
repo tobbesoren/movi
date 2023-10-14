@@ -7,9 +7,10 @@ export function LoaderProvider({children}) {
   const ref = useRef();
   const startLoader = () => ref.current.start();
   const stopLoader = () => ref.current.stop();
+  const isLoaderActive = () => ref.current.isLoading();
   const value = React.useMemo(
-    () => ({ref, startLoader, stopLoader}),
-    [ref, startLoader, stopLoader]
+    () => ({ref, startLoader, stopLoader,isLoaderActive}),
+    [ref, startLoader, stopLoader,isLoaderActive]
   );
 
   return (
