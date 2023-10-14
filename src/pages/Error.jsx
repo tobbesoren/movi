@@ -6,7 +6,7 @@ const Error = () => {
   
   const body = () =>{
     return(
-      <div className="container-body-base">
+      <div className="container-body-error">
         <h1>OOOPS! THATS NOT A VALID PAGE...</h1>
       </div>
     )

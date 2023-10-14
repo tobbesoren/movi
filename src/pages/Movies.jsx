@@ -12,7 +12,7 @@ const Movies = () => {
     return (
       <>
       <Outlet/>
-      <div className="container-body-base"> 
+      <div className="container-body-movies"> 
       </div>
       </>
     )

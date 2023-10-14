@@ -10,7 +10,7 @@ const Popular = () => {
   
   const body = () => {
     return(
-        <div className="container-body-base"> 
+        <div className="container-body-popular"> 
         </div>
       )
   }

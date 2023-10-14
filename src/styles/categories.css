@@ -1,3 +1,43 @@
 .container-body-categories{
+    height: 100vh;
+   
    
 }
+
+.container-genre-menu{
+    height:auto;
+    width: 80%;
+    margin-top: 55px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 10%;
+    column-gap: 20px;
+}
+
+.section-movies{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.container-genre-menu::-webkit-scrollbar{
+    display:none;
+}
+
+h3{
+    cursor: pointer;
+    background-color: none;
+    color: white;
+    padding: 10px;
+    border-radius: 0px;
+    font-weight: 500;
+}
+
+.box {
+    transition: background-color 0.25s ease-in-out;
+    background-color: #007AFF;
+    border-radius: 10px;
+    font-weight: 500;
+}
+

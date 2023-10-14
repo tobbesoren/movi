@@ -16,7 +16,7 @@ const Movie = () => {
 
   const body = () =>{
     return(
-        <div className="container-body-base" >
+        <div className="container-body-movie" >
         
       
       </div>

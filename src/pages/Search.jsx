@@ -3,9 +3,11 @@ import { CoorTransition } from "../components/CoorTransition";
 import { routeTransitionEase,routeTransitionSpringFromRight} from "../helper/transitiontypes";
 import { useState } from "react";
 import fallback from "../images/Yoyo_Cinema_Logo.png";
+import {useLoader} from "../components/LoaderContext"
 import { stringInterPolation } from '../helper/functions';
 
 const Search = () => {
+    const {startLoader, stopLoader} = useLoader();
     const [searchFieldText, setSearchFieldText] = useState('');
     const [resultList, setResultList] = useState([]);
 
@@ -42,9 +44,10 @@ const Search = () => {
         console.log('Hi!')
         if (currentPage <= totalPages) {
             isLoading = true;
+            startLoader();
             const movieList = await fetchData(searchString);
             setResultList(resultList => [...resultList, movieList]);
-
+            stopLoader();
             isLoading = false;
         }
     }
@@ -120,7 +123,7 @@ const Search = () => {
     }
 
     const handleScroll = e =>{
-        //stringInterPolation(e.target.scrollTop,e.target.scrollHeight,e.target.clientHeight);
+        /*stringInterPolation(e.target.scrollTop,e.target.scrollHeight,e.target.clientHeight);*/
         if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
             if (!isLoading) {
                 //nextPage();
