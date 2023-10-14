@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import shoppingCart from '../../assets/shopping-cart.svg'
 import "./CartWidget.css"
+import { useNavigate } from "react-router-dom";
 
 export default function CartWidget({ productsCount }){
     const [productCountClass, setClassName] = useState("productsCountZero")
-    
+    const navigate = useNavigate
 
+    const navigateToCart = () => {
+    navigate('/cart')
+  }
     useEffect(() => {
         if (productsCount===undefined){
             setClassName("productsCountZero")
