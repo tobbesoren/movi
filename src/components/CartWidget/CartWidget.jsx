@@ -8,7 +8,7 @@ export default function CartWidget({ productsCount }){
     const navigate = useNavigate
 
     const navigateToCart = () => {
-    navigate('/cart')
+    navigate('/showCart')
   }
     useEffect(() => {
         if (productsCount===undefined){
@@ -20,7 +20,7 @@ export default function CartWidget({ productsCount }){
 
     return(
         <div>
-            <button className="container">
+            <button className="container" onClick={navigateToCart}>
                 <span className={productCountClass}>
                     {productsCount}
                 </span>

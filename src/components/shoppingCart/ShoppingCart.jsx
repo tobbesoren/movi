@@ -11,27 +11,27 @@ export const ShoppingCart = () => {
     window.scrollTo(0, 0)
   }, [location])
 
-  const handleRemoveProduct = productId => {
+  const handleRemoveMovie = movieId => {
     setCart(prevCart => {
       const updatedCart = { ...prevCart }
-      delete updatedCart[productId]
+      delete updatedCart[movieId]
       return updatedCart
     })
   }
 
-  const handleUpdateQuantity = (productId, operation) => {
+  const handleUpdateQuantity = (movieId, operation) => {
     setCart(prevCart => {
       const updatedCart = { ...prevCart }
-      if (updatedCart[productId]) {
+      if (updatedCart[movieId]) {
         if (operation === "increase") {
-          updatedCart[productId] = {
-            ...updatedCart[productId],
-            quantity: updatedCart[productId].quantity + 1
+          updatedCart[movieId] = {
+            ...updatedCart[movieId],
+            quantity: updatedCart[movieId].quantity + 1
           }
         } else {
-          updatedCart[productId] = {
-            ...updatedCart[productId],
-            quantity: updatedCart[productId].quantity - 1
+          updatedCart[movieId] = {
+            ...updatedCart[movieId],
+            quantity: updatedCart[movieId].quantity - 1
           }
         }
       }
@@ -39,31 +39,31 @@ export const ShoppingCart = () => {
     })
   }
 
-  const getProducts = () => Object.values(cart || {})
+  const getMovies = () => Object.values(cart || {})
 
-  const totalPrice = getProducts().reduce(
-    (accumulator, product) => accumulator + product.price * product.quantity,
+  const totalPrice = getMovies().reduce(
+    (accumulator, movie) => accumulator + movie.price * movie.quantity,
     0
   )
 
   return (
-    <section className={classes.cart}>
-      <h1>Cart</h1>
+    <section className="cart">
+      <h1>Din kundvagn</h1>
 
-      <div className={classes.container}>
-        {getProducts().map(product => (
-          <div className={classes.product} key={product.id}>
-            <img src={product.thumbnail} alt={product.title} />
-            <h3>{product.title}</h3>
+      <div className="container">
+        {getMovies().map(movie => (
+          <div className="movie" key={movie.id}>
+            <img src={movie.imageUrl} alt={movie.title} />
+            <h3>{movie.title}</h3>
             <Increase_Decrease
-              removeProductCallback={() => handleRemoveProduct(product.id)}
-              productId={product.id}
+              removeProductCallback={() => handleRemoveMovie(product.id)}
+              productId={movie.id}
               handleUpdateQuantity={handleUpdateQuantity}
             />
           </div>
         ))}
       </div>
-      <div>{totalPrice}</div>
+      <div>Totalt att betala {totalPrice} kr</div>
     </section>
   )
 }
