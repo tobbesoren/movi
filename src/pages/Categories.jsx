@@ -2,23 +2,12 @@ import { CoorTransition } from "../components/CoorTransition";
 import React, { useState,useEffect, createRef } from "react";
 import '../styles/categories.css';
 import { routeTransitionEase } from "../helper/transitiontypes";
-import { GENRE,genreToLabel } from "../helper/enum";
+import { STATUS,GENRE,genreToLabel } from "../helper/enum";
 import { useLoader } from "../components/LoaderContext";
-import { stringInterPolation } from "../helper/functions";
+import { stringInterPolation,setAsyncTimeout } from "../helper/functions";
 import AsyncImage from "../components/AsyncImage";
-
-
-async function makeRequest(categorie,page) {
-  console.log(page);
-  if(categorie === ""){return null;}
-  else if(page > 2){return null}
-  const genreId = GENRE[categorie];
-  const apiKey = '55948168d0fc4adaaa54ad122d8d368a';
-  const apiUrlGenre = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}&sort_by=popularity.desc&page=${page}`
-  const response = await fetch(apiUrlGenre);
-  const movieData = await response.json();
-  return movieData;
-}
+import { NavLink, Outlet} from "react-router-dom";
+import { fetchByCategorie } from "../helper/request";
 
 const MovieCard = ({movie}) =>{
 
@@ -30,15 +19,15 @@ const MovieCard = ({movie}) =>{
   const movieImgURL = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
   const releaseDate = movie.release_date;
   const key = movie.id;
-
+  const nav = `${movie.id}`
   return (
       <div key={key} className="container-movie">
+        <NavLink className="movie-nav-link" to={nav} data-page="movie-info" state={{ movieId: movie.id }} style={{ textDecoration: 'none' }}>
           <AsyncImage className="movie-poster" src={movieImgURL} onClick={handleOnClick} />
+        </NavLink>
       </div>
   )
 }
-
-
 
 const GenreMenu = ({setFilterRequest}) =>{
 
@@ -50,7 +39,7 @@ const GenreMenu = ({setFilterRequest}) =>{
     setFilterRequest({
       categorie: newCat,
       page: 1,
-      lastScrollHeight:0,
+      scrollHeight:0,
     })
   }
 
@@ -72,7 +61,7 @@ const MoviesByCategorie = ({filterRequest}) =>{
   useEffect(() => {
     const getMovies = async event =>{
     startLoader();
-    makeRequest(filterRequest.categorie,filterRequest.page)
+    fetchByCategorie(filterRequest.categorie,filterRequest.page)
     .then( filteredMovies => {
       if(filteredMovies && filteredMovies.results){
         setMovies(movies.concat(filteredMovies.results));
@@ -97,47 +86,51 @@ const Categories = () => {
   const initialRequest = {
     categorie: "",
     page: 1,
+    scrollHeight:0,
+  }
+
+  const initialScrollStatus = {
+    current:STATUS.IDLE,
     lastScrollHeight:0,
   }
-  let gridLock = false;
-  const ref = createRef(null);
+  const ref = createRef();
   const [filterRequest,setFilterRequest] = useState(initialRequest);
- 
+  const [scrollStatus,setScrollStatus] = useState(initialScrollStatus);
+
   const handleScroll = async () =>{
     const { scrollTop, scrollHeight, clientHeight } = ref.current;
     const endOfPage = scrollTop + clientHeight >= scrollHeight;
-
-    if(endOfPage && !gridLock){
-      gridLock = true;
-      stringInterPolation(scrollTop, scrollHeight, clientHeight)
-      const lastScrollHeight = scrollHeight;
-      setFilterRequest({
-        categorie:filterRequest.categorie,
-        page:filterRequest.page+1,
-        lastScrollHeight:lastScrollHeight,
-      })
+    if(scrollTop && endOfPage){
+      console.log("entered refresh: ",scrollTop, scrollHeight, clientHeight)
+      console.log("filtered values: ",filterRequest.scrollHeight)
+      /*setScrollStatus({
+        current:STATUS.FETCHING,
+        lastScrollHeight:scrollHeight,
+      })*/
     }
   }
 
+  
   useEffect(() =>{
-    if(filterRequest.lastScrollHeight != ref.current.scrollHeight && filterRequest.lastScrollHeight != 0){
-      setTimeout(() =>{
-        ref?.current?.scroll({
-          top:filterRequest.lastScrollHeight,
-          behavior:'smooth'
-          })
-        gridLock = false;
-      },500)
-      
+    if(scrollStatus.current === STATUS.FETCHING && filterRequest.page === 1){
+      stringInterPolation("fetch page: ");
+      setFilterRequest({
+        categorie:filterRequest.categorie,
+        page:filterRequest.page+1,
+        scrollHeight:scrollStatus.lastScrollHeight,
+      })
     }
-  },[filterRequest])
+  },[scrollStatus])
 
   const body = () =>{
     return(
-      <div id="scrollable" ref={ref} className="container-body-categories" onScroll={handleScroll}>
-        <GenreMenu setFilterRequest={setFilterRequest}/>
-        <MoviesByCategorie filterRequest={filterRequest} setFilterRequest={setFilterRequest}/>
-      </div>
+      <>
+        <Outlet/>
+        <div id="scrollable" ref={ref} className="container-body-categories" onScroll={handleScroll}>
+          <GenreMenu setFilterRequest={setFilterRequest}/>
+          <MoviesByCategorie filterRequest={filterRequest}/>
+        </div>
+      </>
     )
   }
 

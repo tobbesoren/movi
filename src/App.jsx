@@ -2,7 +2,7 @@ import { useState,useEffect,useContext } from 'react'
 import { Routes, Route,useLocation,HashRouter } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { LoaderProvider } from "./components/LoaderContext";
-import {NavBar} from "./components/NavBar";
+import { NavigationBar } from './components/NavigationBar';
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Categories from "./pages/Categories";
@@ -15,7 +15,7 @@ import { AppContext,AppProvider } from "./components/AppContext";
 //import './App.css'
 import "./styles/base.css"
 
-const str = "/Search";
+const str = "/categories/";
 const rgx = new RegExp(str);
 
 function LocationProvider({ children }) {
@@ -24,19 +24,17 @@ function LocationProvider({ children }) {
 
 function AppRoutes() {
   const location = useLocation();
-  /*const context = useContext(AppContext);
+  const context = useContext(AppContext);
   useEffect(() => {
     context.setHiddenMenu(rgx.test(location.pathname)); 
-  },[location])*/
+  },[location])
 
   return (
     <Routes location={location} key="default">
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
       <Route path="/popular" element={<Popular />} />
-      <Route path="/categories" element={<Categories />} />
-      <Route path="/movies" >
-        <Route index={true} element={<Movies />} />
+      <Route path="/categories" element={<Categories />} >
         <Route path=":movieId" element={<Movie />} />
       </Route>
       <Route path="*" element={<Error />} />
@@ -49,7 +47,7 @@ const AppBody = () =>{
   return (
     <div className="App">
       <HashRouter>
-      {!appContext.hiddenMenu && <NavBar/>}
+      {!appContext.hiddenMenu && <NavigationBar/>}
       <LocationProvider>
         <AppRoutes />
       </LocationProvider>

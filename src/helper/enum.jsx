@@ -20,11 +20,17 @@ export const GENRE = Object.freeze({
     WESTERN:37
 });
 
+export const STATUS = Object.freeze({
+    IDLE:0,
+    FETCHING:1,
+    LOADING:2,
+    REFRESH:3,
+});
+
 
 export function genreToLabel(genre){
     switch(GENRE[genre]){
-        case GENRE.ACTION: 
-            return "Action";
+        case GENRE.ACTION: return "Action";
         case GENRE.ADVENTURE: return "Adventur";
         case GENRE.ANIMATION: return "Animation";
         case GENRE.COMEDY: return "Comedy";
