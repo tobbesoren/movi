@@ -1,7 +1,7 @@
 import { GENRE } from "./enum";
 import { stringInterPolation } from "./functions";
 const apiKey = '55948168d0fc4adaaa54ad122d8d368a';
-const MAX_PAGES = 1;
+const MAX_PAGES = 5;
 
 export let lastRequest = { 
     genreId: null,
