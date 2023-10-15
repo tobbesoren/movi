@@ -19,6 +19,28 @@
     border-radius: 20px;
 }
 
+
+.container-movies-label{
+    width:80%;
+    margin-left: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: rgb(7, 7,7);
+    border-radius: 20px;
+    padding: 0;
+   
+}
+
+.container-movies-label h2{
+    margin:0;
+}
+
+.container-movies-label h4{
+    margin:0;
+}
+ 
+
 .container-movies{
     margin-left: 10%;
     display: flex;

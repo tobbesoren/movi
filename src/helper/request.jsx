@@ -8,6 +8,7 @@ export let lastRequest = {
     page:0,
     totalPages:0,
     totalMoviesAvailable:0,
+    maxPagesByDeveloper:MAX_PAGES
 };
 
 
@@ -39,7 +40,7 @@ function setLastRequest(genreId,currentPage,totalPages,totalResults){
 function legalSearch(categorie,page){
     if(categorie === ""){return false;}
     if(GENRE[categorie] === lastRequest.genreId){
-        return page <= lastRequest.totalMoviesAvailable && page < MAX_PAGES;
+        return page <= lastRequest.totalMoviesAvailable && page <= MAX_PAGES;
     }
     return page === 1
 }
