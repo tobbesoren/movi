@@ -64,8 +64,10 @@ const MoviesByCategorie = ({filterRequest}) =>{
     fetchByCategorie(filterRequest.categorie,filterRequest.page)
     .then( filteredMovies => {
       if(filteredMovies && filteredMovies.results){
-        setMovies(movies.concat(filteredMovies.results));
+        //setMovies(movies.concat(filteredMovies.results));
+        setMovies(filteredMovies.results);
       }
+      else{setMovies([])}
       stopLoader();
     })
     .catch(() =>{

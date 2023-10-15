@@ -55,7 +55,6 @@ const MovieInfoBody = ({movieId}) => {
   
   return (
   <div className="movie-info-body" >
-    <PageHeader label={movie.title}/>
     <div className="movie-top-header">
       <div className="movie-image-container"> <AsyncImage src={posterUrl}></AsyncImage> </div>
       <div className="movie-label"> <label>{movie.overview}</label> </div>
@@ -75,7 +74,7 @@ const MovieInfoBody = ({movieId}) => {
             {(movie.spoken_languages && movie.spoken_languages.map(language => <h5 key={Math.random()}>{language.english_name}</h5>))}
           </div>
         </div>
-        <div className="grid-row-far-right">
+        <div className="movie-row-far-right">
           <div className="header-subheader">
             <h4 >Genre</h4>
             {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
