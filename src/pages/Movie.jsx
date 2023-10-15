@@ -2,7 +2,7 @@ import { CoorTransition } from "../components/CoorTransition";
 import React, { useState, useEffect} from 'react';
 import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/movie.css';
-import { routeTransitionSpringFromBottom } from "../helper/transitiontypes";
+import { routeTransitionSpringFromRight } from "../helper/transitiontypes";
 import AsyncImage from "../components/AsyncImage";
 import { capitalizeFirstLetter } from "../helper/functions";
 import { fetchById } from "../helper/request";
@@ -100,13 +100,12 @@ const Movie = () => {
     return(
         <div className="container-body-movie" >
         <MovieInfoBody movieId={movieId}/>
-      
       </div>
     );
   }
 
   return (
-    <CoorTransition page={body} name="info trans" transition={routeTransitionSpringFromBottom}/>
+    <CoorTransition page={body} name="info trans" transition={routeTransitionSpringFromRight}/>
   );
   };
 

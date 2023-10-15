@@ -10,20 +10,12 @@ import { NavLink, Outlet} from "react-router-dom";
 import { fetchByCategorie } from "../helper/request";
 
 const MovieCard = ({movie}) =>{
-
-  const handleOnClick = e =>{
-
-  }
-
-  const movieTitle = movie.title;
   const movieImgURL = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
-  const releaseDate = movie.release_date;
-  const key = movie.id;
   const nav = `${movie.id}`
   return (
-      <div key={key} className="container-movie">
+      <div key={movie.id} className="container-movie">
         <NavLink className="movie-nav-link" to={nav} data-page="movie-info" state={{ movieId: movie.id }} style={{ textDecoration: 'none' }}>
-          <AsyncImage className="movie-poster" src={movieImgURL} onClick={handleOnClick} />
+          <AsyncImage className="movie-poster" src={movieImgURL}/>
         </NavLink>
       </div>
   )
@@ -63,11 +55,10 @@ const MoviesByCategorie = ({filterRequest}) =>{
     startLoader();
     fetchByCategorie(filterRequest.categorie,filterRequest.page)
     .then( filteredMovies => {
-      if(filteredMovies && filteredMovies.results){
-        //setMovies(movies.concat(filteredMovies.results));
-        setMovies(filteredMovies.results);
+      if(filteredMovies){
+        if(filterRequest.page === 1){setMovies(filteredMovies);}
+        else{setMovies(movies.concat(filteredMovies));}
       }
-      else{setMovies([])}
       stopLoader();
     })
     .catch(() =>{
@@ -79,7 +70,7 @@ const MoviesByCategorie = ({filterRequest}) =>{
 
   return (
     <div className="container-movies">
-        {movies.map(movie => <MovieCard key={Math.random()} movie={movie}/>)}
+      {movies.map(movie => <MovieCard key={Math.random()} movie={movie}/>)}
     </div>
   );
 }
@@ -91,38 +82,23 @@ const Categories = () => {
     scrollHeight:0,
   }
 
-  const initialScrollStatus = {
-    current:STATUS.IDLE,
-    lastScrollHeight:0,
-  }
   const ref = createRef();
   const [filterRequest,setFilterRequest] = useState(initialRequest);
-  const [scrollStatus,setScrollStatus] = useState(initialScrollStatus);
 
   const handleScroll = async () =>{
     const { scrollTop, scrollHeight, clientHeight } = ref.current;
     const endOfPage = scrollTop + clientHeight >= scrollHeight;
-    if(scrollTop && endOfPage){
-      console.log("entered refresh: ",scrollTop, scrollHeight, clientHeight)
-      console.log("filtered values: ",filterRequest.scrollHeight)
-      /*setScrollStatus({
-        current:STATUS.FETCHING,
-        lastScrollHeight:scrollHeight,
-      })*/
-    }
-  }
 
-  
-  useEffect(() =>{
-    if(scrollStatus.current === STATUS.FETCHING && filterRequest.page === 1){
-      stringInterPolation("fetch page: ");
+    if(scrollTop && endOfPage){
       setFilterRequest({
         categorie:filterRequest.categorie,
         page:filterRequest.page+1,
-        scrollHeight:scrollStatus.lastScrollHeight,
+        scrollHeight:scrollHeight,
       })
-    }
-  },[scrollStatus])
+   }
+  }
+
+
 
   const body = () =>{
     return(
@@ -130,6 +106,7 @@ const Categories = () => {
         <Outlet/>
         <div id="scrollable" ref={ref} className="container-body-categories" onScroll={handleScroll}>
           <GenreMenu setFilterRequest={setFilterRequest}/>
+          <div className="container-header"><h1>TOP 100</h1></div>
           <MoviesByCategorie filterRequest={filterRequest}/>
         </div>
       </>

@@ -11,7 +11,7 @@ import Movies from "./pages/Movies";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
 import { AppContext,AppProvider } from "./components/AppContext";
-//import Search from './components/Search'
+
 //import './App.css'
 import "./styles/base.css"
 

@@ -12,7 +12,7 @@ export const routeTransitionSpring = {
   };
 
   export const routeTransitionSpringFromRight = {
-    initial:{ x:"100vw"},
+    initial:{ x:"25vw"},
     final: {
         x:"0vw",
         transition: {
