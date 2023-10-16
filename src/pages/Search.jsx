@@ -1,13 +1,13 @@
 import '../styles/search.css';
 import { CoorTransition } from "../components/CoorTransition";
-import { routeTransitionEase,routeTransitionSpringFromRight} from "../helper/transitiontypes";
-import { useState } from "react";
+import { routeTransitionEase} from "../helper/transitiontypes";
+import { useContext, useEffect, useState } from "react";
 import fallback from "../images/Yoyo_Cinema_Logo.png";
-import {useLoader} from "../components/LoaderContext"
 import { stringInterPolation } from '../helper/functions';
+import { AppContext } from '../components/AppContext';
 
 const Search = () => {
-    const [searchFieldText, setSearchFieldText] = useState('');
+    const [searchRequest,setSearchRequest] = useContext(AppContext).api;
     const [resultList, setResultList] = useState([]);
 
     let currentPage = 1;
@@ -65,9 +65,7 @@ const Search = () => {
     
 
     const createMovieList = (movies) => {
-        
         let movieList = [];
-
         movies.forEach(movie => {
                 const newMovie = Movie(movie);
                 movieList.push(newMovie);
@@ -78,12 +76,10 @@ const Search = () => {
 
 
     const Movie = (movie) => {
-
         const movieTitle = movie.title;
         const movieImgURL = 'https://image.tmdb.org/t/p/original' + movie.poster_path;
         const releaseDate = movie.release_date;
         const key = movie.id;
-
         return (
             <div key={key} className="preview">
                 <img className="previewImage" src={movieImgURL} onError={(e) => (e.currentTarget.src = fallback)} />
@@ -93,53 +89,39 @@ const Search = () => {
         )
     }
 
-
-    const handleInput = (input) => {
-        setSearchFieldText(input.target.value);
-      };
-
-    const handleEnter = (event) => {
-        if (event.key === "Enter") {
-            searchDataBase();
-        }
-    }
-
-
     const searchDataBase = () => {
-        if(searchFieldText != '') {
-            clearPage();
+        clearPage();
+        if(searchRequest != '') {
             searchString = createSearchString();
-            setSearchFieldText('');
             loadPage();
         }
     }
 
 
     const createSearchString = () => {
-        return searchFieldText.split(' ').join('+');
+        return searchRequest?.split(' ').join('+');
     }
 
     const handleScroll = e =>{
-        /*stringInterPolation(e.target.scrollTop,e.target.scrollHeight,e.target.clientHeight);*/
         if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
             if (!isLoading) {
-                //nextPage();
+                nextPage();
             }
         }
         
     }
 
   const body = () =>{
+    useEffect(() => {
+        searchDataBase(); 
+    },[searchRequest])
+  
     return(
-    <div className="container-body-search" onScroll={handleScroll}>
-        <div className="container-search-field">
-            <input onKeyDown={handleEnter} type="text" value={searchFieldText} onChange={handleInput}></input>
-            <button onClick={searchDataBase}>Search</button>
+        <div className="container-body-search" onScroll={handleScroll}>
+            <div className="content">
+                {resultList}
+            </div>
         </div>
-        <div className="content">
-            {resultList}
-        </div>
-    </div>
     )
   }
 
