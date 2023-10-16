@@ -1,10 +1,12 @@
+import '../styles/search.css';
+import { CoorTransition } from "../components/CoorTransition";
+import { routeTransitionEase,routeTransitionSpringFromRight} from "../helper/transitiontypes";
 import { useState } from "react";
-import "./Search.css"
 import fallback from "../images/Yoyo_Cinema_Logo.png";
-
+import {useLoader} from "../components/LoaderContext"
+import { stringInterPolation } from '../helper/functions';
 
 const Search = () => {
-
     const [searchFieldText, setSearchFieldText] = useState('');
     const [resultList, setResultList] = useState([]);
 
@@ -43,7 +45,6 @@ const Search = () => {
             isLoading = true;
             const movieList = await fetchData(searchString);
             setResultList(resultList => [...resultList, movieList]);
-
             isLoading = false;
         }
     }
@@ -118,26 +119,34 @@ const Search = () => {
         return searchFieldText.split(' ').join('+');
     }
 
-    window.addEventListener('scroll', () => {
-        const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
-        if (scrollTop + clientHeight >= scrollHeight) {
+    const handleScroll = e =>{
+        /*stringInterPolation(e.target.scrollTop,e.target.scrollHeight,e.target.clientHeight);*/
+        if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
             if (!isLoading) {
-                nextPage();
+                //nextPage();
             }
         }
-    })
+        
+    }
 
-
-    return (
-        <div>
+  const body = () =>{
+    return(
+    <div className="container-body-search" onScroll={handleScroll}>
+        <div className="container-search-field">
             <input onKeyDown={handleEnter} type="text" value={searchFieldText} onChange={handleInput}></input>
             <button onClick={searchDataBase}>Search</button>
-            <div className="content">
-                {resultList}
-            </div>
-            
         </div>
+        <div className="content">
+            {resultList}
+        </div>
+    </div>
     )
-}
+  }
 
-export default Search
+  return (
+    <CoorTransition page={body} name="search trans" transition={routeTransitionEase}/>
+  );
+
+};
+  
+export default Search;
