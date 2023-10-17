@@ -89,7 +89,9 @@ h1{
   right:0;
   font-size: 20px;
   margin-right: 50px;
-  color:white
+  color:white;
+  cursor: pointer;
+  
 }
 
 .menu-bar .search-link-disabled{
@@ -98,8 +100,7 @@ h1{
 
 .menu-bar .search-field-disabled{
   display: none;
- 
-}
+ }
 
 .menu-bar .search-field{
   display: flex;
@@ -121,12 +122,11 @@ h1{
 }
 
 @-webkit-keyframes run {
-  0% { left: 50%;width: calc(50vw - 200px);}
+  0% { left: 50%;width: calc(50vw - 194px);}
   50%{ left : 25%;width:calc(75vw - 200px);}
   100%{ left: 0%;width: calc(100vw - 200px);}
   
 }
-
 
 .menu-bar .search-field input{
   background-color: transparent;
@@ -144,9 +144,19 @@ h1{
   height: calc(100% - 2px);
   border-right: 1px black solid;
   border-radius: 10px;
-  background-color: #007AFF;
+  background-color: white;
+  /*background-color: #007AFF;*/
   margin-right: 1px;
-  color:white;
+  color:black;
+  cursor: pointer;
+}
+
+.menu-bar .search-button-nav{
+  width:auto;
+  height: calc(100% - 2px);
+  margin-right: 1px;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
 }
 
@@ -155,8 +165,9 @@ h1{
   height: calc(100% - 2px);
   border-right: 1px black solid;
   border-radius: 10px;
-  background-color: rgb(255,59,48);
+  background-color: white;
+  /*background-color: rgb(255,59,48);*/
   margin-left: 1px;
-  color:white;
+  color:black;
   cursor: pointer;
 }

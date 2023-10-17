@@ -6,15 +6,18 @@ import fallback from "../images/Yoyo_Cinema_Logo.png";
 import { stringInterPolation } from '../helper/functions';
 import { AppContext } from '../components/AppContext';
 
+
+let lastFetch ={
+    currentPage:1,
+    totalPages:1,
+    isLoading:false,
+    searchString:''
+}
+
+
 const Search = () => {
     const [searchRequest,setSearchRequest] = useContext(AppContext).api;
     const [resultList, setResultList] = useState([]);
-
-    let currentPage = 1;
-    let totalPages = 1;
-    let isLoading = false;
-    let searchString = '';
-    
 
     const fetchData = async () => {
         
@@ -23,7 +26,7 @@ const Search = () => {
         // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NTk0ODE2OGQwZmM0YWRhYWE1NGFkMTIyZDhkMzY4YSIsInN1YiI6IjY1MjdiNzljODEzODMxMDBjNDhhMmQ4OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lpXnKgQM6TMS9lewqhi-56rX2PwAYM_6ASAsWgUK4g4'
 
         const apiKey = '55948168d0fc4adaaa54ad122d8d368a';
-        const apiURL = 'https://api.themoviedb.org/3/search/movie?query=' + searchString + '&api_key=' + apiKey + '&page=' + currentPage;
+        const apiURL = 'https://api.themoviedb.org/3/search/movie?query=' + lastFetch.searchString + '&api_key=' + apiKey + '&page=' + lastFetch.currentPage;
 
         const response = await fetch(apiURL);
         const movieData = await response.json();
@@ -31,7 +34,7 @@ const Search = () => {
 
         const movies = movieData.results;
 
-        totalPages = movieData.total_pages;
+        lastFetch.totalPages = movieData.total_pages;
 
         const movieList = createMovieList(movies);
 
@@ -41,26 +44,26 @@ const Search = () => {
 
     const loadPage = async () => {
         console.log('Hi!')
-        if (currentPage <= totalPages) {
-            isLoading = true;
-            const movieList = await fetchData(searchString);
+        if (lastFetch.currentPage <= lastFetch.totalPages) {
+            lastFetch.isLoading = true;
+            const movieList = await fetchData(lastFetch.searchString);
             setResultList(resultList => [...resultList, movieList]);
-            isLoading = false;
+            lastFetch.isLoading = false;
         }
     }
 
 
     const nextPage = async () => {
-        currentPage ++;
+        lastFetch.currentPage ++;
         loadPage();
     }
 
 
     const clearPage = () => {
         setResultList([]);
-        searchString = '';
-        totalPages = 1;
-        currentPage = 1;
+        lastFetch.searchString = '';
+        lastFetch.totalPages = 1;
+        lastFetch.currentPage = 1;
     }
     
 
@@ -92,7 +95,7 @@ const Search = () => {
     const searchDataBase = () => {
         clearPage();
         if(searchRequest != '') {
-            searchString = createSearchString();
+            lastFetch.searchString = createSearchString();
             loadPage();
         }
     }
@@ -104,7 +107,7 @@ const Search = () => {
 
     const handleScroll = e =>{
         if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
-            if (!isLoading) {
+            if (!lastFetch.isLoading) {
                 nextPage();
             }
         }
@@ -126,6 +129,7 @@ const Search = () => {
   }
 
   return (
+
     <CoorTransition page={body} name="search trans" transition={routeTransitionEase}/>
   );
 
