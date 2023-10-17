@@ -1,7 +1,6 @@
 .container-body-search{
     height: 100vh;
     overflow-y: scroll;
-     
 }
 
 .container-body-search h1{
@@ -11,14 +10,13 @@
 }
 
 .container-search-field{
-    position: fixed;
     display: flex;
     justify-content: center;
-    width:100%;
+    width:50%;
     border-radius: 20px;
     height: 30px;
-    margin-top: 60px;
-   
+    margin-top: 80px;
+    margin-left: 25%;
 }
 
 .container-search-field input{
