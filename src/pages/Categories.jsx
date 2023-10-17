@@ -98,6 +98,7 @@ const Categories = () => {
     const endOfPage = scrollTop + clientHeight >= scrollHeight;
 
     if(scrollTop && endOfPage){
+      //stringInterPolation(scrollTop,scrollHeight,clientHeight);
       const newPage = filterRequest.page + 1;
       if(newPage <= lastRequest.maxPagesByDeveloper && newPage <= lastRequest.totalPages){
         setFilterRequest({
@@ -109,6 +110,13 @@ const Categories = () => {
    }
   }
 
+  /*
+    ref.scrollTo({ top: 0, behavior: 'smooth' })
+  
+  */
+  /*useEffect(() =>{
+    stringInterPolation("loaded pages: ",lastRequest.page)
+  },[ref])*/
 
 
   const body = () =>{

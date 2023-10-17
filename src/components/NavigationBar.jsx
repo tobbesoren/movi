@@ -79,7 +79,7 @@ export const NavigationBar = () => {
           <button className="search-button" onClick={newSearchRequest}>Search</button>
         </div>
         <NavLink className={(currentPage==="search") ? "search-link-disabled" : "search-link"} to="/search" data-page="search" onClick= {(e) => handleCloseMenu(e,"search")}><i className="fa fa-search"></i></NavLink>
-        <div ref={ref} className="container-nav-link">
+        <div ref={ref} className={(currentPage==="search") ? "container-nav-link-search" : "container-nav-link"}>
           <NavLink className="base-link" to="/popular" data-page="popular" onClick={(e) => handleToggleMenu(e,"popular")}>Popular</NavLink>
           <NavLink className="base-link" to="/categories" data-page="categories" onClick={(e) => handleToggleMenu(e,"categories")}>Categories</NavLink>
         </div>

@@ -44,6 +44,15 @@ h1{
 
 .menu-bar.responsive .container-nav-link{
   position:absolute;
+  margin-top: 55px;
+  right:0;
+  width:150px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.menu-bar.responsive .container-nav-link-search{
+  position:absolute;
   margin-top: 20px;
   right:0;
   width:150px;
