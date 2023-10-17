@@ -3,16 +3,12 @@
     border: none;
     background: none;
     cursor: pointer;
-    position: relative;
 }
   
 .shoppingCart {
     height: 3em;
     will-change: filter;
     transition: filter 300ms;
-}
-.shoppingCart:hover{
-    transform: scale(1.2);
 }
   
 .productsCount {

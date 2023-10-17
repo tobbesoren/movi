@@ -10,10 +10,13 @@ import Popular from "./pages/Popular";
 import Movies from "./pages/Movies";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
+import ShoppingCart from './pages/ShoppingCart';
+import Checkout from './pages/Checkout';
 import { AppContext,AppProvider } from "./components/AppContext";
 
 //import './App.css'
 import "./styles/base.css"
+
 
 const str = "/categories/";
 const rgx = new RegExp(str);
@@ -33,10 +36,12 @@ function AppRoutes() {
     <Routes location={location} key="default">
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/shoppingcart" element={<ShoppingCart />} />
       <Route path="/popular" element={<Popular />} />
       <Route path="/categories" element={<Categories />} >
         <Route path=":movieId" element={<Movie />} />
       </Route>
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

@@ -3,6 +3,7 @@ import React, { useState,useRef,useEffect } from "react";
 import '../styles/navbar.css';
 import logo from "../assets/movi-loggo.png"
 import { stringInterPolation } from "../helper/functions";
+import CartWidget from "./CartWidget/CartWidget";
 
 
 function useOutsideClickToClose() {
@@ -46,6 +47,9 @@ export const NavigationBar = () => {
     <div className={isMenuOpen ? "menu-bar responsive" : "menu-bar"} data-menu-bar id="toggle_button">
         <NavLink className="home-link" to="/" data-page="home" onClick={(e) => handleCloseMenu(e,"home")} ><img src={logo}/></NavLink>
         <NavLink className={(currentPage==="search") ? "search-link-disabled" : "search-link"} to="/search" data-page="search" onClick= {(e) => handleCloseMenu(e,"search")}><i className="fa fa-search"></i></NavLink>
+        <NavLink className="shoppingCart" to="/shoppingcart" data-page="shoppingcart">
+          <CartWidget></CartWidget>
+        </NavLink>
         <div ref={ref} className="container-nav-link">
           <NavLink className="base-link" to="/popular" data-page="popular" onClick={(e) => handleToggleMenu(e,"popular")}>Popular</NavLink>
           <NavLink className="base-link" to="/categories" data-page="categories" onClick={(e) => handleToggleMenu(e,"categories")}>Categories</NavLink>

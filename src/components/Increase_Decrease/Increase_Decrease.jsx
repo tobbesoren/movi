@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import "./Increase_Decrease.css"
 
-export const Increase_Decrease = ({
+const Increase_Decrease = ({
   removeProductCallback,
   handleUpdateQuantity,
   productId
@@ -51,3 +51,5 @@ export const Increase_Decrease = ({
     </div>
   )
 }
+
+export default Increase_Decrease

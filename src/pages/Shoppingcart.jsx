@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import useLocalStorageState from "use-local-storage-state"
 import { useLocation } from "react-router-dom"
-import { Increase_Decrease } from "../Increase_Decrease/Increase_Decrease"
+import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease"
 
-export const ShoppingCart = () => {
+const ShoppingCart = () => {
   const [cart, setCart] = useLocalStorageState("cart", {})
   const location = useLocation()
 
@@ -48,7 +48,7 @@ export const ShoppingCart = () => {
 
   return (
     <section className="cart">
-      <h1>Din kundvagn</h1>
+      <h1>Your shoppingcart</h1>
 
       <div className="container">
         {getMovies().map(movie => (
@@ -63,7 +63,8 @@ export const ShoppingCart = () => {
           </div>
         ))}
       </div>
-      <div>Totalt att betala {totalPrice} kr</div>
+      <div>Total amount to pay {totalPrice} $</div>
     </section>
   )
 }
+export default ShoppingCart
