@@ -4,7 +4,7 @@ import '../styles/categories.css';
 import { routeTransitionEase } from "../helper/transitiontypes";
 import { STATUS,GENRE,genreToLabel } from "../helper/enum";
 import { useLoader } from "../components/LoaderContext";
-import { stringInterPolation,setAsyncTimeout } from "../helper/functions";
+import { stringInterPolation,setAsyncTimeoutThenExecute } from "../helper/functions";
 import AsyncImage from "../components/AsyncImage";
 import { NavLink, Outlet} from "react-router-dom";
 import { fetchByCategorie } from "../helper/request";
@@ -98,26 +98,30 @@ const Categories = () => {
     const endOfPage = scrollTop + clientHeight >= scrollHeight;
 
     if(scrollTop && endOfPage){
-      //stringInterPolation(scrollTop,scrollHeight,clientHeight);
       const newPage = filterRequest.page + 1;
       if(newPage <= lastRequest.maxPagesByDeveloper && newPage <= lastRequest.totalPages){
         setFilterRequest({
           categorie:filterRequest.categorie,
           page:filterRequest.page+1,
-          scrollHeight:scrollHeight,
+          scrollHeight:scrollHeight-clientHeight,
         })
       }
    }
   }
 
-  /*
-    ref.scrollTo({ top: 0, behavior: 'smooth' })
   
-  */
-  /*useEffect(() =>{
-    stringInterPolation("loaded pages: ",lastRequest.page)
-  },[ref])*/
+  useEffect(() =>{
+    if(ref && ref.current){
+      if(lastRequest.page && filterRequest.scrollHeight > 0){
+        setAsyncTimeoutThenExecute(scrollIntoPosition,100);
+      }
+    }
+  },[filterRequest])
 
+
+  const scrollIntoPosition = async () =>{
+    ref.current.scrollTo({ top: filterRequest.scrollHeight, behavior: 'smooth' })
+  }
 
   const body = () =>{
     return(

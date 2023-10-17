@@ -1,4 +1,4 @@
-import { NavLink} from "react-router-dom";
+import { NavLink, useLocation} from "react-router-dom";
 import React, { useState,useRef,useEffect, useContext, useCallback } from "react";
 import '../styles/navbar.css';
 import logo from "../assets/movi-loggo.png"
@@ -29,6 +29,7 @@ function useOutsideClickToClose() {
 
 
 export const NavigationBar = () => {
+  const location = useLocation();
   const [searchFieldText, setSearchFieldText] = useState('');
   const [currentPage,setCurrentPage] = useState("home")
   const { ref, isMenuOpen,setIsMenuOpen } = useOutsideClickToClose();
@@ -67,9 +68,21 @@ export const NavigationBar = () => {
     }
   }
 
+  function resetPageOnBackNavigation(){
+    const strippedPath = location.pathname.replace(/^\/|\/$/g, '').split('/')[0];
+    let name = (strippedPath === "") ? "home" : strippedPath;
+    if(name !== currentPage){
+      setCurrentPage(name);
+    }
+  }
+
   useEffect(() =>{
     resetSearch();
   },[currentPage])
+
+  useEffect(() =>{
+    resetPageOnBackNavigation();
+  })
 
   return (
     <div className={isMenuOpen ? "menu-bar responsive" : "menu-bar"} data-menu-bar id="toggle_button">
