@@ -1,0 +1,89 @@
+.menu-bar {
+  position: relative;
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+  height: 55px;
+  overflow: hidden;
+ 
+}
+  
+.menu-bar a {
+  color: #030303;
+  padding: 14px 16px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 16px;
+  margin: 0 8px;
+  text-decoration: inherit;
+}
+
+h1{
+  text-align: center;
+  margin-top: 0;
+}
+  
+.menu-bar .icon {
+  color: #f2f2f2;
+  display: none;
+  cursor: pointer;
+}
+
+.menu-bar .base-link {
+  display: none;
+}
+
+.menu-bar a.icon {
+  float: right;
+  display: block;
+}
+
+.menu-bar.responsive {
+  position: relative;
+  transition: height 0.25s ease-in-out;
+  height: 300px;
+}
+
+.menu-bar.responsive .container-nav-link{
+  position:absolute;
+  margin-top: 55px;
+  right:0;
+  width:150px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.menu-bar .icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.menu-bar.responsive .base-link {
+  float: none;
+  display: block;
+  text-align: right;
+}
+
+.menu-bar .home-link{
+  position: absolute;
+  left:0;
+  font-size: 20px;
+ 
+}
+
+.home-link img{
+  cursor: pointer;
+  height: 35px;
+}
+
+.menu-bar .search-link{
+  position:absolute;
+  right:0;
+  font-size: 20px;
+  margin-right: 50px;
+  color:white
+}
+
+.menu-bar .search-link-disabled{
+  display: none;
+}

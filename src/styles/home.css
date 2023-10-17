@@ -1,0 +1,15 @@
+.container-body-home{
+    width:100%;
+    height:100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.poster{
+    max-width: min-content;
+    max-height: min-content;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+ 
+}
