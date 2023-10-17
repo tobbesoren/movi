@@ -4,9 +4,8 @@ import { routeTransitionEase } from "../helper/transitiontypes";
 import AsyncImage from '../components/AsyncImage';
 import poster from "../assets/cinema.jpg"
 
-
 const Home = () => {
- 
+  
   const body = () =>{
     return(
       <div className="container-body-home">

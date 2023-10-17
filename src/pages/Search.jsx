@@ -18,7 +18,6 @@ let lastFetch ={
 const Search = () => {
     const [searchRequest,setSearchRequest] = useContext(AppContext).api;
     const [resultList, setResultList] = useState([]);
-
     const fetchData = async () => {
         
             
@@ -93,8 +92,8 @@ const Search = () => {
     }
 
     const searchDataBase = () => {
-        clearPage();
         if(searchRequest != '') {
+            clearPage();
             lastFetch.searchString = createSearchString();
             loadPage();
         }
@@ -116,9 +115,9 @@ const Search = () => {
 
   const body = () =>{
     useEffect(() => {
-        searchDataBase(); 
+       searchDataBase(); 
     },[searchRequest])
-  
+    
     return(
         <div className="container-body-search" onScroll={handleScroll}>
             <div className="content">

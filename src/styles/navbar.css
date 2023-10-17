@@ -98,14 +98,12 @@ h1{
   display: none;
 }
 
-.menu-bar .search-field-disabled{
-  display: none;
- }
 
 .menu-bar .search-field{
   display: flex;
   height: 40px;
-  background-color: white;
+  border: 1px rgb(209, 200, 200) solid;
+ 
   border-radius: 10px;
   margin-left: 130px;
   margin-right:50px;
@@ -128,6 +126,10 @@ h1{
   
 }
 
+.menu-bar .search-field-disabled{
+  display: none;
+ }
+
 .menu-bar .search-field input{
   background-color: transparent;
   width: 100%;
@@ -136,22 +138,28 @@ h1{
   border: none;
   outline: none;
   font-size: large;
+  color:white;
 
 }
 
 .menu-bar .search-button{
+  font-weight: bolder;
+  font-size: large;
   width:auto;
   height: calc(100% - 2px);
-  border-right: 1px black solid;
-  border-radius: 10px;
-  background-color: white;
   /*background-color: #007AFF;*/
   margin-right: 1px;
-  color:black;
+  color:white;
   cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: bolder;
+
 }
 
 .menu-bar .search-button-nav{
+  font-weight: bolder;
+  font-size: large;
   width:auto;
   height: calc(100% - 2px);
   margin-right: 1px;
@@ -161,13 +169,13 @@ h1{
 }
 
 .menu-bar .clear-button{
+  font-weight: bolder;
+  font-size: large;
   width:auto;
   height: calc(100% - 2px);
-  border-right: 1px black solid;
-  border-radius: 10px;
-  background-color: white;
-  /*background-color: rgb(255,59,48);*/
+  background: none;
+  border: none;
   margin-left: 1px;
-  color:black;
   cursor: pointer;
+
 }
