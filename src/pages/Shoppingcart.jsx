@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import useLocalStorageState from "use-local-storage-state"
-import { useLocation } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease"
 
 const ShoppingCart = () => {
@@ -64,6 +64,10 @@ const ShoppingCart = () => {
         ))}
       </div>
       <div>Total amount to pay {totalPrice} $</div>
+      <NavLink className="checkout_btn" to="/checkout" data-page="checkout">
+        <button>Checkout</button>
+      </NavLink>
+      
     </section>
   )
 }
