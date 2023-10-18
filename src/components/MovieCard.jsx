@@ -1,9 +1,9 @@
 import { NavLink, Outlet} from "react-router-dom";
 import AsyncImage from "../components/AsyncImage";
 
-const MovieCard = ({movie}) =>{
+const MovieCard = ({movie,path}) =>{
     const movieImgURL = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
-    const nav = `/movie/${movie.id}`
+    const nav = `${path}${movie.id}`
     
     return (
         <div key={movie.id} className="container-movie">

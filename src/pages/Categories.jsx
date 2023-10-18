@@ -67,7 +67,7 @@ const MoviesByCategorie = ({filterRequest}) =>{
         <h4>(1 - {movies.length})</h4>
       </div>
       <div className="container-movies">
-        {movies.map(movie => <MovieCard key={Math.random()} movie={movie}/>)}
+        {movies.map(movie => <MovieCard key={Math.random()} movie={movie} path=""/>)}
       </div>
     </div>
     
