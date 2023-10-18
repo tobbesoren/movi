@@ -9,18 +9,9 @@ import AsyncImage from "../components/AsyncImage";
 import { NavLink, Outlet} from "react-router-dom";
 import { fetchByCategorie } from "../helper/request";
 import { lastRequest } from "../helper/request";
+import MovieCard from "../components/MovieCard";
 
-const MovieCard = ({movie}) =>{
-  const movieImgURL = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
-  const nav = `${movie.id}`
-  return (
-      <div key={movie.id} className="container-movie">
-        <NavLink className="movie-nav-link" to={nav} data-page="movie-info" state={{ movieId: movie.id }} style={{ textDecoration: 'none' }}>
-          <AsyncImage className="movie-poster" src={movieImgURL}/>
-        </NavLink>
-      </div>
-  )
-}
+
 
 const GenreMenu = ({setFilterRequest}) =>{
 
@@ -53,18 +44,18 @@ const MoviesByCategorie = ({filterRequest}) =>{
  
   useEffect(() => {
     const getMovies = async event =>{
-    startLoader();
-    fetchByCategorie(filterRequest.categorie,filterRequest.page)
-    .then( filteredMovies => {
-      if(filteredMovies){
-        if(filterRequest.page === 1){setMovies(filteredMovies);}
-        else{setMovies(movies.concat(filteredMovies));}
-      }
-      stopLoader();
-    })
-    .catch(() =>{
-      stopLoader();
-     })
+      startLoader();
+      fetchByCategorie(filterRequest.categorie,filterRequest.page)
+      .then( filteredMovies => {
+        if(filteredMovies){
+          if(filterRequest.page === 1){setMovies(filteredMovies);}
+          else{setMovies(movies.concat(filteredMovies));}
+        }
+        stopLoader();
+      })
+      .catch(() =>{
+        stopLoader();
+      })
     }
     getMovies()
   },[filterRequest])

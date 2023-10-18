@@ -26,6 +26,7 @@ export async function fetchById(movieID){
     const url = urlWithImdbID(movieID);
     const response = await fetch(url);
     const movieData = await response.json();
+    
     return movieData;
 }
 

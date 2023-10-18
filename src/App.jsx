@@ -34,9 +34,9 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
       <Route path="/popular" element={<Popular />} />
-      <Route path="/categories" element={<Categories />} >
-        <Route path=":movieId" element={<Movie />} />
-      </Route>
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/movie/:movieId" element={<Movie />} />
+      
       <Route path="*" element={<Error />} />
     </Routes>
   );
