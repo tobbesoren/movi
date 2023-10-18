@@ -2,8 +2,12 @@
     height:inherit;
     width: inherit;
     overflow-y: scroll;
-  
+    background-image: url("/src/assets/categorie_wallpaper.jpg");
+    background-size:cover;
+    
+    
 }
+
 
 .container-genre-menu{
     height:auto;
@@ -15,7 +19,6 @@
     justify-content: center;
     margin-left: 10%;
     column-gap: 20px;
-    background-color: rgb(7, 7, 7);
     border-radius: 20px;
 }
 
@@ -26,7 +29,6 @@
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
-    background-color: rgb(7, 7,7);
     border-radius: 20px;
     padding: 0;
    
