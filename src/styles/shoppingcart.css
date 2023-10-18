@@ -1,30 +1,47 @@
 .cart {
-    padding: 1rem;
-    margin-top: 8rem;
-}
-img {
-    max-width: 3rem;
-    height: auto;
-    margin: .875rem;
+    padding: 1em;
+    margin-top: 1em;
 }
 
-.container {
+.cartHeader{
+    font-size: 4em;
+}
+
+.cartList {
     display: flex;
     flex-direction: column;
-}
-.product {
-    display: flex;
-    border-top: 1px dotted;
-    border-left: 1px dotted;
-    border-right: 1px dotted;
-    padding: .3rem .5rem;
+    list-style: none;   
     align-items: center;
 }
-h3 {
-    color: #007185;
+
+.cartItemTitle {
+    color: white;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 2em;
     line-height: 20px;
     margin: .3rem;
-    flex: 1;
+    text-align: center;
+}
+
+.moviePoster{
+    height: auto;
+    width: 15em;
+}
+
+.checkoutSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.checkout_link{
+    margin-top: 20px;
+}
+.checkout_btn{
+    padding: 20px;
+    background-color: blue;
+    font-size: 2em;
+    font-weight: 600;
 }

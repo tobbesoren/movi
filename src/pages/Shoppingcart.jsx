@@ -1,21 +1,18 @@
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import useLocalStorageState from "use-local-storage-state"
 import { NavLink, useLocation } from "react-router-dom"
 import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease"
+import { AppContext } from "../components/AppContext"
+import '../styles/shoppingcart.css';
 
 const ShoppingCart = (props) => {
-  const [cart, setCart] = useLocalStorageState("cart", {})
-  const location = useLocation()
+  const location = useLocation();
+  const [cart, setCart] = useContext(AppContext).shoppingCart;
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location])
-
-  function add(movie){
-    setCart(prevCart =>
-      updatedCart[movie.id])
-      return updatedCart
-  }
 
   const handleRemoveMovie = movieId => {
     setCart(prevCart => {
@@ -54,27 +51,27 @@ const ShoppingCart = (props) => {
 
   return (
     <section className="cart">
-      <h1>Your shoppingcart</h1>
+      <h1 className="cartHeader">Your shoppingcart</h1>
 
-      <div className="container">
+      <ul className="cartList">
         {getMovies().map(movie => (
-          <div className="movie" key={movie.id}>
-            <img src={movie.imageUrl} alt={movie.title} />
-            <h3>{movie.title}</h3>
+          <li className="cartItem" key={movie.id}>
+            <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
+            <h3 className="cartItemTitle">{movie.title}</h3>
             <p>{movie.price}</p>
             <Increase_Decrease
-              removeProductCallback={() => handleRemoveMovie(product.id)}
-              productId={movie.id}
+              removeProductCallback={() => handleRemoveMovie(movie.id)}
+              movieid={movie.id}
               handleUpdateQuantity={handleUpdateQuantity}
             />
-          </div>
+          </li>
         ))}
-      </div>
-      <div>Total amount to pay {totalPrice} $</div>
-      <NavLink className="checkout_btn" to="/checkout" data-page="checkout">
-        <button>Checkout</button>
+      </ul>
+      <div className="checkoutSection">Total amount to pay {totalPrice} $
+      <NavLink className="checkout_link" to="/checkout" data-page="checkout">
+        <button className="checkout_btn">Checkout</button>
       </NavLink>
-      
+      </div>
     </section>
   )
 }

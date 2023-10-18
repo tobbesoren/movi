@@ -1,13 +1,11 @@
 import { CoorTransition } from "../components/CoorTransition";
-import React, { useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext} from 'react';
 import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/movie.css';
 import { routeTransitionSpringFromRight } from "../helper/transitiontypes";
 import AsyncImage from "../components/AsyncImage";
-import { capitalizeFirstLetter } from "../helper/functions";
 import { fetchById } from "../helper/request";
 import { useLoader } from "../components/LoaderContext";
-import ShoppingCart from "./ShoppingCart";
 import { AppContext } from "../components/AppContext";
 
 const HeadSub = ({head,sub}) =>{
@@ -32,8 +30,8 @@ const PageHeader = ({label}) => {
 
 const MovieInfoBody = ({movieId}) => {
   const [movie,setMovie] = useState(null);
-  const {startLoader, stopLoader} = useLoader();  
-  const cart = useContext(AppContext).menu;
+  const {startLoader, stopLoader} = useLoader();
+  const [cart, setCart] = useContext(AppContext).shoppingCart;
 
   useEffect(() => {
       const getMovie = async event =>{
@@ -55,12 +53,12 @@ const MovieInfoBody = ({movieId}) => {
   if(!movie){return null}
   const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`
   
-  function addToCart(addedMovie){
-    cart.setCart(current => [...current, addedMovie]);
-    console.log(addedMovie.title);
-    setTotal(current => current + addedMovie.price);
-    console.log(...cart.map(movie =>
-      movie.title));
+  const addToCart = (addedMovie) => {
+    setCart(prevState => {
+      return [...prevState, addedMovie];
+    })
+    console.log(cart.map(movie =>
+      movie));
   }
   
   return (

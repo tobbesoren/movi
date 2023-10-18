@@ -1,0 +1,8 @@
+.checkout{
+    display: flex;
+    flex-direction: column;
+}
+.inputField{
+    padding: 5px;
+    width: 200px;
+}
