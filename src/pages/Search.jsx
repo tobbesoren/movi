@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import fallback from "../images/Yoyo_Cinema_Logo.png";
 import { stringInterPolation } from '../helper/functions';
 import { AppContext } from '../components/AppContext';
+import MovieCard from "../components/MovieCard";
 
 
 let lastFetch ={
@@ -69,7 +70,7 @@ const Search = () => {
     const createMovieList = (movies) => {
         let movieList = [];
         movies.forEach(movie => {
-                const newMovie = Movie(movie);
+                const newMovie = MovieCard({movie});
                 movieList.push(newMovie);
             }
         )
@@ -77,19 +78,19 @@ const Search = () => {
     }
 
 
-    const Movie = (movie) => {
-        const movieTitle = movie.title;
-        const movieImgURL = 'https://image.tmdb.org/t/p/original' + movie.poster_path;
-        const releaseDate = movie.release_date;
-        const key = movie.id;
-        return (
-            <div key={key} className="preview">
-                <img className="previewImage" src={movieImgURL} onError={(e) => (e.currentTarget.src = fallback)} />
-                <h3 className="previewTitle">{movieTitle}</h3>
-                <p className="previewReleaseDate">{releaseDate}</p>
-            </div>
-        )
-    }
+    // const Movie = (movie) => {
+    //     const movieTitle = movie.title;
+    //     const movieImgURL = 'https://image.tmdb.org/t/p/original' + movie.poster_path;
+    //     const releaseDate = movie.release_date;
+    //     const key = movie.id;
+    //     return (
+    //         <div key={key} className="preview">
+    //             <img className="previewImage" src={movieImgURL} onError={(e) => (e.currentTarget.src = fallback)} />
+    //             <h3 className="previewTitle">{movieTitle}</h3>
+    //             <p className="previewReleaseDate">{releaseDate}</p>
+    //         </div>
+    //     )
+    // }
 
     const searchDataBase = () => {
         if(searchRequest != '') {
