@@ -8,6 +8,7 @@ import { fetchById } from "../helper/request";
 import { useLoader } from "../components/LoaderContext";
 import { fetchMovieFromLocalStorageById, removeMovieFromLocalStorageById, storeMovieToLocalStorageById } from "../helper/storage";
 import { AlertDialog, ActionAlertDialog } from "../components/DialogModel";
+import { MOVIE_STATUS, movieStatusToLabel } from "../helper/enum";
 
 const HeadSub = ({ head, sub }) => {
   return (
@@ -61,7 +62,7 @@ const MovieInfoBody = ({ movieId }) => {
         <ActionAlertDialog
             title="Add to cart?"
             lblRed="Cancel"
-            lblBlue="Proceed"
+            lblBlue="Yes, add movie"
             leftAction={false}
             isOpened={modelIsOpened}
             onAction={onAddToCart}
@@ -79,7 +80,7 @@ const MovieInfoBody = ({ movieId }) => {
       return (
         <ActionAlertDialog
             title="Item already in cart!"
-            lblRed="Remove?"
+            lblRed="Remove from cart"
             lblBlue="OK"
             leftAction={true}
             isOpened={modelIsOpened}
@@ -87,6 +88,7 @@ const MovieInfoBody = ({ movieId }) => {
             onClose={() => setModelIsOpened(false)}
             >
             <h4></h4>
+            <p>Proceed to checkout, then start watching!</p>
           </ActionAlertDialog>
       );
     }
@@ -102,6 +104,7 @@ const MovieInfoBody = ({ movieId }) => {
   const handlePlayButtonClick = event =>{
     fetchMovieFromLocalStorageById(movie.id)
     .then(movie => {
+      stringInterPolation(movie.status,movieStatusToLabel(movie.status))
       setIsInCart(true);
       setModelIsOpened(true);
     })

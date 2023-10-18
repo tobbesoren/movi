@@ -35,6 +35,17 @@ export const MOVIE_STATUS = Object.freeze({
 });
 
 
+export function movieStatusToLabel(movie_status){
+    switch(MOVIE_STATUS[movie_status]){
+        case GENRE.IN_CART: return "Movie is in cart";
+        case GENRE.PURCHASED: return "Movie is purchased";
+        case GENRE.STARTED_WATCHING: return "Movie has run more then one second";
+        case GENRE.FINISHED_WATCHING: return "Movie has reached its end";
+        default:return "";
+    }
+}
+
+
 export function genreToLabel(genre){
     switch(GENRE[genre]){
         case GENRE.ACTION: return "Action";
