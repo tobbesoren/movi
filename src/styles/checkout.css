@@ -1,8 +1,11 @@
 .checkout{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .inputField{
     padding: 5px;
     width: 200px;
+    margin: 0 8px;
 }
