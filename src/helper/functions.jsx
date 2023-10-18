@@ -11,7 +11,7 @@ export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const setAsyncTimeout = (cb, timeout = 0) => new Promise(resolve => {
+export const setAsyncTimeoutThenExecute = (cb, timeout = 0) => new Promise(resolve => {
     setTimeout(() => {
         cb();
         resolve();
