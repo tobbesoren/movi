@@ -3,13 +3,19 @@ import useLocalStorageState from "use-local-storage-state"
 import { NavLink, useLocation } from "react-router-dom"
 import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease"
 
-const ShoppingCart = () => {
+const ShoppingCart = (props) => {
   const [cart, setCart] = useLocalStorageState("cart", {})
   const location = useLocation()
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location])
+
+  function add(movie){
+    setCart(prevCart =>
+      updatedCart[movie.id])
+      return updatedCart
+  }
 
   const handleRemoveMovie = movieId => {
     setCart(prevCart => {
@@ -55,6 +61,7 @@ const ShoppingCart = () => {
           <div className="movie" key={movie.id}>
             <img src={movie.imageUrl} alt={movie.title} />
             <h3>{movie.title}</h3>
+            <p>{movie.price}</p>
             <Increase_Decrease
               removeProductCallback={() => handleRemoveMovie(product.id)}
               productId={movie.id}

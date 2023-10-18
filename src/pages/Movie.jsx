@@ -1,5 +1,5 @@
 import { CoorTransition } from "../components/CoorTransition";
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/movie.css';
 import { routeTransitionSpringFromRight } from "../helper/transitiontypes";
@@ -7,6 +7,8 @@ import AsyncImage from "../components/AsyncImage";
 import { capitalizeFirstLetter } from "../helper/functions";
 import { fetchById } from "../helper/request";
 import { useLoader } from "../components/LoaderContext";
+import ShoppingCart from "./ShoppingCart";
+import { AppContext } from "../components/AppContext";
 
 const HeadSub = ({head,sub}) =>{
   
@@ -30,7 +32,8 @@ const PageHeader = ({label}) => {
 
 const MovieInfoBody = ({movieId}) => {
   const [movie,setMovie] = useState(null);
-  const {startLoader, stopLoader} = useLoader();
+  const {startLoader, stopLoader} = useLoader();  
+  const cart = useContext(AppContext).menu;
 
   useEffect(() => {
       const getMovie = async event =>{
@@ -52,6 +55,13 @@ const MovieInfoBody = ({movieId}) => {
   if(!movie){return null}
   const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`
   
+  function addToCart(addedMovie){
+    cart.setCart(current => [...current, addedMovie]);
+    console.log(addedMovie.title);
+    setTotal(current => current + addedMovie.price);
+    console.log(...cart.map(movie =>
+      movie.title));
+  }
   
   return (
   <div className="movie-info-body" >
@@ -79,7 +89,11 @@ const MovieInfoBody = ({movieId}) => {
             <h4 >Genre</h4>
             {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
           </div>
+          
        </div>
+       <div className="buttonContainer">
+          <button className="buyBtn" onClick={() => addToCart(movie)} >Buy</button>
+        </div>
     </div>
   
   </div>
@@ -99,7 +113,7 @@ const Movie = () => {
   const body = () =>{
     return(
         <div className="container-body-movie" >
-        <MovieInfoBody movieId={movieId}/>
+        <MovieInfoBody movieId={movieId}/>       
       </div>
     );
   }

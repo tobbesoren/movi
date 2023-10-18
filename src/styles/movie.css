@@ -80,4 +80,19 @@
     text-align: center;
 
 }
+
+.buttonContainer{
+    width: 100%;
+    display: flex;
+    justify-content:end;
+}
+
+.buyBtn{
+    background-color: rgb(44, 44, 253);
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
   
