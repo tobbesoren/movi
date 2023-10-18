@@ -44,18 +44,18 @@ const MoviesByCategorie = ({filterRequest}) =>{
  
   useEffect(() => {
     const getMovies = async event =>{
-    startLoader();
-    fetchByCategorie(filterRequest.categorie,filterRequest.page)
-    .then( filteredMovies => {
-      if(filteredMovies){
-        if(filterRequest.page === 1){setMovies(filteredMovies);}
-        else{setMovies(movies.concat(filteredMovies));}
-      }
-      stopLoader();
-    })
-    .catch(() =>{
-      stopLoader();
-     })
+      startLoader();
+      fetchByCategorie(filterRequest.categorie,filterRequest.page)
+      .then( filteredMovies => {
+        if(filteredMovies){
+          if(filterRequest.page === 1){setMovies(filteredMovies);}
+          else{setMovies(movies.concat(filteredMovies));}
+        }
+        stopLoader();
+      })
+      .catch(() =>{
+        stopLoader();
+      })
     }
     getMovies()
   },[filterRequest])
