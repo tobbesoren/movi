@@ -79,7 +79,7 @@ const MovieInfoBody = ({ movieId }) => {
     const AlreadyInCartDialog = () =>{
       return (
         <ActionAlertDialog
-            title="Item already in cart!"
+            title="Movie already in cart!"
             lblRed="Remove from cart"
             lblBlue="OK"
             leftAction={true}
