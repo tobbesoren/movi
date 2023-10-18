@@ -2,7 +2,7 @@ import { CoorTransition } from "../components/CoorTransition";
 import React, { useState,useEffect, createRef } from "react";
 import '../styles/categories.css';
 import { routeTransitionEase } from "../helper/transitiontypes";
-import { STATUS,GENRE,genreToLabel } from "../helper/enum";
+import { GENRE,genreToLabel } from "../helper/enum";
 import { useLoader } from "../components/LoaderContext";
 import { stringInterPolation,setAsyncTimeoutThenExecute } from "../helper/functions";
 import AsyncImage from "../components/AsyncImage";

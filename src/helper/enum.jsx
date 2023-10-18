@@ -27,6 +27,13 @@ export const STATUS = Object.freeze({
     REFRESH:3,
 });
 
+export const MOVIE_STATUS = Object.freeze({
+    IN_CART:0,
+    PURCHASED:1,
+    STARTED_WATCHING:2,
+    FINISHED_WATCHING:3,
+});
+
 
 export function genreToLabel(genre){
     switch(GENRE[genre]){

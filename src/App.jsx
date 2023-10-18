@@ -13,8 +13,8 @@ import { AppContext,AppProvider } from "./components/AppContext";
 import "./styles/base.css"
 import { stringInterPolation } from './helper/functions';
 
-const str = "/categories/";
-const rgx = new RegExp(str);
+const str1 = "/categories/";
+const rgx1 = new RegExp(str1);
 
 function LocationProvider({ children }) {
   return <AnimatePresence >{children}</AnimatePresence>;
@@ -22,12 +22,13 @@ function LocationProvider({ children }) {
 
 function AppRoutes() {
   const location = useLocation();
-  const menu = useContext(AppContext).menu;
+  /*const menu = useContext(AppContext).menu;
   const [hiddenMenu,setHiddenMenu] = menu;
   
+  
   useEffect(() => {
-    setHiddenMenu(rgx.test(location.pathname)); 
-  },[location])
+    setHiddenMenu(rgx1.test(location.pathname)); 
+  },[location])*/
 
   return (
     <Routes location={location} key="default">
@@ -38,7 +39,6 @@ function AppRoutes() {
         <Route path=":movieId" element={<Movie />} />
       </Route>
       <Route path="/movie/:movieId" element={<Movie />} />
-      
       <Route path="*" element={<Error />} />
     </Routes>
   );
