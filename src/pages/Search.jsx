@@ -69,8 +69,9 @@ const Search = () => {
 
     const createMovieList = (movies) => {
         let movieList = [];
+        const path = "/movie/"
         movies.forEach(movie => {
-                const newMovie = MovieCard({movie});
+                const newMovie = MovieCard({movie,path});
                 movieList.push(newMovie);
             }
         )
