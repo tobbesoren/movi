@@ -24,6 +24,7 @@ function AppRoutes() {
   const location = useLocation();
   const menu = useContext(AppContext).menu;
   const [hiddenMenu,setHiddenMenu] = menu;
+  
   useEffect(() => {
     setHiddenMenu(rgx.test(location.pathname)); 
   },[location])

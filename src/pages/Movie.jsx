@@ -4,7 +4,7 @@ import {useLocation,useNavigate} from 'react-router-dom';
 import '../styles/movie.css';
 import { routeTransitionSpringFromRight } from "../helper/transitiontypes";
 import AsyncImage from "../components/AsyncImage";
-import { capitalizeFirstLetter } from "../helper/functions";
+import { capitalizeFirstLetter, setAsyncTimeoutThenExecute } from "../helper/functions";
 import { fetchById } from "../helper/request";
 import { useLoader } from "../components/LoaderContext";
 
@@ -32,6 +32,11 @@ const MovieInfoBody = ({movieId}) => {
   const [movie,setMovie] = useState(null);
   const {startLoader, stopLoader} = useLoader();
 
+
+  function fetchMovie(){
+
+  }
+
   useEffect(() => {
       const getMovie = async event =>{
       startLoader();
@@ -46,7 +51,7 @@ const MovieInfoBody = ({movieId}) => {
           stopLoader();
       })
       }
-      getMovie()
+      setAsyncTimeoutThenExecute(getMovie,100);
   },[movieId])
 
   if(!movie){return null}
@@ -90,12 +95,7 @@ const MovieInfoBody = ({movieId}) => {
 const Movie = () => {
   const location = useLocation();
   const movieId = location.state.movieId;
-  const navigate = useNavigate();
  
-  const handleNavigateBack = event =>{
-    navigate(-1);
-  }
-
   const body = () =>{
     return(
         <div className="container-body-movie" >
