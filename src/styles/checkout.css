@@ -7,5 +7,11 @@
 .inputField{
     padding: 5px;
     width: 200px;
-    margin: 0 8px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.labelAndInput{
+    display: grid;
+    margin: 10px;
 }

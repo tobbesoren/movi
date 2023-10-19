@@ -14,6 +14,12 @@
     align-items: center;
 }
 
+.cartItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .cartItemTitle {
     color: white;
     font-weight: 700;
@@ -44,4 +50,5 @@
     background-color: blue;
     font-size: 2em;
     font-weight: 600;
+    border-radius: 10px;
 }
