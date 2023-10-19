@@ -2,12 +2,9 @@
     height:inherit;
     width: inherit;
     overflow-y: scroll;
-    background-image: url("/src/assets/categorie_wallpaper.jpg");
+    background-image: url("../assets/categorie_wallpaper.jpg");
     background-size:cover;
-    
-    
 }
-
 
 .container-genre-menu{
     height:auto;
