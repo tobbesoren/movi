@@ -56,7 +56,8 @@
     width: 8em;
     height: 4em;
     top: 1em;
-    background-color: rgb(255, 166, 0);
+    background-color:#5271ff;
+    color: #ffde59;
     border-radius: 8px;
     position: relative;
     z-index: 3;
