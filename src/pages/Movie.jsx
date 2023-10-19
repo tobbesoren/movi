@@ -1,53 +1,136 @@
 import { CoorTransition } from "../components/CoorTransition";
-import { useState, useEffect, useContext} from 'react';
-import {useLocation,useNavigate} from 'react-router-dom';
+import { useState, useEffect , useContext} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/movie.css';
 import { routeTransitionSpringFromRight } from "../helper/transitiontypes";
-import AsyncImage from "../components/AsyncImage";
+import { capitalizeFirstLetter,currentDatePlus, setAsyncTimeoutThenExecute, stringInterPolation } from "../helper/functions";
 import { fetchById } from "../helper/request";
 import { useLoader } from "../components/LoaderContext";
 import { AppContext } from "../components/AppContext";
+import { fetchMovieFromLocalStorageById, removeMovieFromLocalStorageById, storeMovieToLocalStorageById } from "../helper/storage";
+import { AlertDialog, ActionAlertDialog } from "../components/DialogModel";
+import { MOVIE_STATUS, movieStatusToLabel } from "../helper/enum";
 
-const HeadSub = ({head,sub}) =>{
-  
-  return <div className="header-subheader">
-            <h4 >{head}</h4>
-            <h5 >{sub}</h5>
-          </div>
+const HeadSub = ({ head, sub }) => {
+  return (
+    <div className="header-subheader">
+      <h4>{head}</h4>
+      <h5>{sub}</h5>
+    </div>
+  )
 }
 
-const PageHeader = ({label}) => {
+const PageHeader = ({ label }) => {
   return (
-        <div className="header-body">
-            <div className="header-label">
-              <h2>{label}</h2>
-            </div>
-       </div>
-    
+    <div className="header-body">
+      <div className="header-label">
+        <h2>{label}</h2>
+      </div>
+    </div>
   );
 };
 
+const MovieInfoBody = ({ movieId }) => {
+  const [movie, setMovie] = useState(null);
+  const { startLoader, stopLoader } = useLoader();
+  const [modelIsOpened, setModelIsOpened] = useState(false);
+  const [isInCart,setIsInCart] = useState(true);
 
-const MovieInfoBody = ({movieId}) => {
-  const [movie,setMovie] = useState(null);
-  const {startLoader, stopLoader} = useLoader();
+  const Dialog = () => {
+  
+    const onAddToCart = () => {
+      storeMovieToLocalStorageById(movie.id)
+      .then( movie =>{
+        stringInterPolation("result of storage: ",movie.price);
+      })
+      .catch(error =>{
+        stringInterPolation("Presented error from storage: ",error)
+      })
+    };
+
+    const onRemoveFromCart = () => {
+      removeMovieFromLocalStorageById(movie.id)
+      .then( movie =>{
+        stringInterPolation("result of storage: ",movie);
+      })
+      .catch(error =>{
+        stringInterPolation("Presented error from storage: ",error)
+      })
+    };
+
+    const AddToCartDialog = () =>{
+      return (
+        <ActionAlertDialog
+            title="Add to cart?"
+            lblRed="Cancel"
+            lblBlue="Yes, add movie"
+            leftAction={false}
+            isOpened={modelIsOpened}
+            onAction={onAddToCart}
+            onClose={() => setModelIsOpened(false)}
+          >
+            <h4>{movie.title}</h4>
+            <p>price: 50.0&#x24;</p>
+            <p>start: {currentDatePlus(0)}</p>
+            <p>end: {currentDatePlus(7)}</p>
+          </ActionAlertDialog>
+      );
+    }
+
+    const AlreadyInCartDialog = () =>{
+      return (
+        <ActionAlertDialog
+            title="Movie already in cart!"
+            lblRed="Remove from cart"
+            lblBlue="OK"
+            leftAction={true}
+            isOpened={modelIsOpened}
+            onAction={onRemoveFromCart}
+            onClose={() => setModelIsOpened(false)}
+            >
+            <h4></h4>
+            <p>Proceed to checkout, then start watching!</p>
+          </ActionAlertDialog>
+      );
+    }
+    
+    return(
+      <div>
+        {isInCart ? <AlreadyInCartDialog/> : <AddToCartDialog/> }
+      </div>
+    )
+    
+  };
+
+  const handlePlayButtonClick = event =>{
+    fetchMovieFromLocalStorageById(movie.id)
+    .then(movie => {
+      stringInterPolation(movie.status,movieStatusToLabel(movie.status))
+      setIsInCart(true);
+      setModelIsOpened(true);
+    })
+    .catch(error =>{
+      setIsInCart(false);
+      setModelIsOpened(true);
+    })
+  }
   const [cart, setCart] = useContext(AppContext).shoppingCart;
 
   useEffect(() => {
-      const getMovie = async event =>{
+    const getMovie = async event => {
       startLoader();
       fetchById(movieId)
-      .then( collectedMovie => {
-          if(collectedMovie){
+        .then(collectedMovie => {
+          if (collectedMovie) {
             setMovie(collectedMovie);
           }
           stopLoader();
-      })
-      .catch(() =>{
+        })
+        .catch(() => {
           stopLoader();
       })
       }
-      getMovie()
+      setAsyncTimeoutThenExecute(getMovie,100);
   },[movieId])
 
   if(!movie){return null}
@@ -62,39 +145,43 @@ const MovieInfoBody = ({movieId}) => {
   }
   
   return (
-  <div className="movie-info-body" >
-    <div className="movie-top-header">
-      <div className="movie-image-container"> <AsyncImage src={posterUrl}></AsyncImage> </div>
-      <div className="movie-label"> <label>{movie.overview}</label> </div>
+    <div className="movie-info-body" style={{ backgroundImage: `url(${posterUrl})` }}>
+      <Dialog/>
+      <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2 }}>
+      <img src="src/images/play.png" alt="Play" />
     </div>
-    
-    <div className="movie-data-grid"> 
+    <div className="overlay"></div>
+    <div className="movie-top-header" style={{ zIndex: 2 }}>
+      <div className="movie-label">
+        
+        <label>{movie.overview}</label>
+      </div>
+    </div>
+      <div className="movie-data-grid"style={{ zIndex: 2 }}>
         <div className="movie-row-left">
-          <HeadSub head="Runtime" sub={movie.runtime}/>
-          <HeadSub head="Ranking" sub={movie.vote_average}/>
-          <HeadSub head="Revenue" sub={movie.revenue}/>
-          <HeadSub head="Release date" sub={movie.release_date}/>
-          <HeadSub head="Homepage" sub={movie.homepage}/>
-       </div>
-        <div className="movie-row-right">
-          <div className="header-subheader">
-            <h4 >Languages</h4>
-            {(movie.spoken_languages && movie.spoken_languages.map(language => <h5 key={Math.random()}>{language.english_name}</h5>))}
-          </div>
+          <HeadSub head="Runtime" sub={movie.runtime} />
+          <HeadSub head="Ranking" sub={movie.vote_average} />
+          <HeadSub head="Revenue" sub={movie.revenue} />
+          <HeadSub head="Release date" sub={movie.release_date} />
+          <HeadSub head="Homepage" sub={movie.homepage} />
         </div>
-        <div className="movie-row-far-right">
-          <div className="header-subheader">
-            <h4 >Genre</h4>
-            {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
-          </div>
+        <div className="movie-row-right">
+    <div className="header-subheader">
+      <h4>Languages</h4>
+      {(movie.spoken_languages && movie.spoken_languages.map(language => <h5 key={Math.random()}>{language.english_name}</h5>))}
+    </div>
+    <div className="header-subheader">
+      <h4>Genre</h4>
+      {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
+    </div>
           
        </div>
        <div className="buttonContainer">
           <button className="buyBtn" onClick={() => addToCart(movie)} >Buy</button>
-        </div>
+   </div>
+</div>
+
     </div>
-  
-  </div>
   )
 }
 
@@ -102,12 +189,7 @@ const MovieInfoBody = ({movieId}) => {
 const Movie = () => {
   const location = useLocation();
   const movieId = location.state.movieId;
-  const navigate = useNavigate();
  
-  const handleNavigateBack = event =>{
-    navigate(-1);
-  }
-
   const body = () =>{
     return(
         <div className="container-body-movie" >

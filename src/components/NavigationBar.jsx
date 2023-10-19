@@ -1,11 +1,10 @@
-import { NavLink, useLocation} from "react-router-dom";
+import { NavLink, useLocation, useNavigate} from "react-router-dom";
 import React, { useState,useRef,useEffect, useContext, useCallback } from "react";
 import '../styles/navbar.css';
 import logo from "../assets/movi-loggo.png"
 import { stringInterPolation } from "../helper/functions";
 import CartWidget from "./CartWidget/CartWidget";
 import { AppContext } from "./AppContext";
-
 
 function useOutsideClickToClose() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,35 +30,35 @@ function useOutsideClickToClose() {
 
 export const NavigationBar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchFieldText, setSearchFieldText] = useState('');
-  const [currentPage,setCurrentPage] = useState("home")
+  const [searchFieldIsOpen, setSearchFieldIsOpen] = useState(false);
   const { ref, isMenuOpen,setIsMenuOpen } = useOutsideClickToClose();
   const [searchRequest,setSearchRequest] = useContext(AppContext).api;
   
-  const handleToggleMenu = (event,page) =>{
-    if(page !== currentPage){setCurrentPage(page);}
-    setIsMenuOpen(!isMenuOpen);
+  const handleCloseMenu = () =>{
+    setIsMenuOpen(false);
+    setSearchFieldIsOpen(false);
   }
 
-  const handleCloseMenu = (event,page) =>{
-    setCurrentPage(page);
+  const handleCloseMenuAndDoNewSearch = () =>{
     setIsMenuOpen(false);
+    newSearchRequest();
   }
  
-  const handleInput = (input) => {
-    setSearchFieldText(input.target.value);
-  };
-
-  
   const handleEnter = (event) => {
     if(event.key === "Enter") {
-      newSearchRequest(event);
+      if(strippedPathEquals("search")){newSearchRequest();}
+      else{ 
+        newSearchRequest(event); 
+        navigate("/search");
+      }
     }
   }
 
-  
-  const newSearchRequest = useCallback(event => {
-    setSearchRequest(searchFieldText);
+  const closeSearchField = useCallback(event => {
+    setSearchFieldText("");
+    setSearchFieldIsOpen(false);
   })
 
   function resetSearch(){
@@ -69,38 +68,38 @@ export const NavigationBar = () => {
     }
   }
 
-  function resetPageOnBackNavigation(){
-    const strippedPath = location.pathname.replace(/^\/|\/$/g, '').split('/')[0];
-    let name = (strippedPath === "") ? "home" : strippedPath;
-    if(name !== currentPage){
-      setCurrentPage(name);
-    }
-  }
+  const newSearchRequest = useCallback(event => { setSearchRequest(searchFieldText);})
+  const strippedPathEquals = (page) =>{ return strippedPath() === page; }
+  const strippedPath = () =>{ return location.pathname.replace(/^\/|\/$/g, '').split('/')[0]; }
+  const handleInput = (input) => { setSearchFieldText(input.target.value); }
+  const handleToggleMenu = () =>{ setIsMenuOpen(!isMenuOpen);}
 
-  useEffect(() =>{
-    resetSearch();
-  },[currentPage])
-
+  /*
   useEffect(() =>{
     resetPageOnBackNavigation();
-  })
+  },[location])*/
 
   return (
     <div className={isMenuOpen ? "menu-bar responsive" : "menu-bar"} data-menu-bar id="toggle_button">
-        <NavLink className="home-link" to="/" data-page="home" onClick={(e) => handleCloseMenu(e,"home")} ><img src={logo}/></NavLink>
-        <div className={(currentPage==="search") ? "search-field" : "search-field-disabled"}>
-          <input onKeyDown={handleEnter} type="text" value={searchFieldText} onChange={handleInput}></input>
-          <button className="search-button" onClick={newSearchRequest}>Search</button>
+        <NavLink className="home-link" to="/" data-page="home" onClick={(e) => handleCloseMenu()} ><img src={logo}/></NavLink>
+        <div className={searchFieldIsOpen ? "search-field" : "search-field-disabled"}>
+          <button className="clear-button" onClick={closeSearchField}>&#10060;</button>
+          <input onKeyDown={handleEnter} type="text" placeholder="title" value={searchFieldText} onChange={handleInput}></input>
+          {strippedPathEquals("search") ? 
+          <button className="search-button" onClick={newSearchRequest}><i className="fa fa-search"></i></button> : 
+          <NavLink className="search-button-nav" to="/search" data-page="search" onClick= {(e) => handleCloseMenuAndDoNewSearch()}><button className="search-button"><i className="fa fa-search"></i></button></NavLink>
+          }
         </div>
-        <NavLink className={(currentPage==="search") ? "search-link-disabled" : "search-link"} to="/search" data-page="search" onClick= {(e) => handleCloseMenu(e,"search")}><i className="fa fa-search"></i></NavLink>
+        <a className={searchFieldIsOpen ? "search-link-disabled" : "search-link"} onClick= {(e) => setSearchFieldIsOpen(true)}><i className="fa fa-search"></i></a>
         <NavLink className="shoppingCart" to="/shoppingcart" data-page="shoppingcart">
           <CartWidget></CartWidget>
         </NavLink>
-        <div ref={ref} className={(currentPage==="search") ? "container-nav-link-search" : "container-nav-link"}>
-          <NavLink className="base-link" to="/popular" data-page="popular" onClick={(e) => handleToggleMenu(e,"popular")}>Popular</NavLink>
-          <NavLink className="base-link" to="/categories" data-page="categories" onClick={(e) => handleToggleMenu(e,"categories")}>Categories</NavLink>
+        <div ref={ref} className={searchFieldIsOpen ? "container-nav-link-search" : "container-nav-link"}>
+          <NavLink className="base-link" to="/popular" data-page="popular" onClick={(e) => handleToggleMenu()}>Popular</NavLink>
+          <NavLink className="base-link" to="/categories" data-page="categories" onClick={(e) => handleToggleMenu()}>Categories</NavLink>
         </div>
-        <a className="icon" onClick={(e) => handleToggleMenu(e,currentPage)}> <i className="fa fa-bars"></i> </a>
+        <a className="icon" onClick={(e) => handleToggleMenu()}> <i className="fa fa-bars"></i> </a>
     </div>
   )
 };
+

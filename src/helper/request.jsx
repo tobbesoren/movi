@@ -26,6 +26,7 @@ export async function fetchById(movieID){
     const url = urlWithImdbID(movieID);
     const response = await fetch(url);
     const movieData = await response.json();
+    
     return movieData;
 }
 
@@ -52,3 +53,9 @@ function urlWithCategorieAndPage(genreId,page){
 function urlWithImdbID(movieID){
     return `https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`
 }
+
+function urlVideoWithImdbID(movieID){
+    return `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey}&language=en-US`
+}
+
+//https://www.youtube.com/watch?v=h6hZkvrFIj0

@@ -1,0 +1,58 @@
+.container-dialog{
+    width: 400px;
+    border-radius: 8px;
+    border: 1px solid #888;
+    padding: 10px;
+    text-align: center;
+    -webkit-animation:linear;
+    -webkit-animation-name: op;
+    -webkit-animation-duration: 0.9s;
+
+}
+
+.container-dialog h3{
+    padding: 0;
+    margin: 0;
+    color:black;
+}
+
+.container-button-alert{
+    padding:30px;
+}
+
+.container-button-action{
+    padding:10px;
+}
+
+.container-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.container-buttons{
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+}
+
+.container-buttons button{
+    font-size: 12px;
+    width: auto;
+    padding: 14px 20px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.button-red{
+    color:red;
+}
+
+.button-blue{
+    color:#007AFF;
+}
+
+@-webkit-keyframes op {
+0% { opacity: 0;}
+50%{ opacity: 0.5;}
+100%{ opacity: 1.0;}
+
+}
