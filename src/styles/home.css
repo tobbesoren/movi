@@ -1,11 +1,28 @@
 .container-body-home{
+    
     height:inherit;
     width: inherit;
     overflow-y: scroll;
+}
+.container-body-home h2 {
+    
+    text-align: left;
+    margin-top: 100px;
+    margin-left: 20px;
+    text-overflow: clip;
+    text-align: center;
 }
 
 .poster{
     width: 100%;
     height: auto;
  
+}
+
+.movieList {
+    margin-top: 20px;
+    display: flex;
+    flex: 1 0 0px;
+    flex-wrap:wrap;
+    justify-content: center;
 }

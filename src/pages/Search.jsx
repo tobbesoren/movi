@@ -43,7 +43,7 @@ const Search = () => {
 
 
     const loadPage = async () => {
-        console.log('Hi!')
+       
         if (lastFetch.currentPage <= lastFetch.totalPages) {
             lastFetch.isLoading = true;
             const movieList = await fetchData(lastFetch.searchString);
