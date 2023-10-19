@@ -7,8 +7,10 @@ import { fetchById, fetchByPopularity } from "../helper/request";
 import { useEffect, useState } from 'react';
 import { useLoader } from "../components/LoaderContext";
 import MovieCard from '../components/MovieCard';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
 
   const Featured = () => {
     const {startLoader, stopLoader} = useLoader();
@@ -37,13 +39,18 @@ const Home = () => {
     useEffect(() => {
       getFeaturedMovie();
     },[])
+
+    const navigateToMovie = () => {
+      navigate(`/movie/${featuredMovie.id}`, {state:{ movieId: featuredMovie.id }})
+      
+    }
     
     if(featuredMovie == null) {return null}
 
     return (
       <div className='featured'>
         <h2>Featured</h2>
-        <img className="poster" src={`https://image.tmdb.org/t/p/original${featuredMovie.poster_path}`}></img>
+        <img className="poster" src={`https://image.tmdb.org/t/p/original${featuredMovie.poster_path}`} onClick={navigateToMovie}></img>
       </div>
     )
   }
@@ -83,7 +90,6 @@ const Home = () => {
       <div>
       <h2>Popular</h2>
       <div className="movieList">
-        
         {movieCards}
       </div>
       </div>
