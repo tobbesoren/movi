@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/movie.css';
 import { routeTransitionSpringFromRight } from "../helper/transitiontypes";
-import AsyncImage from "../components/AsyncImage";
-import { capitalizeFirstLetter, setAsyncTimeoutThenExecute } from "../helper/functions";
+import { capitalizeFirstLetter,currentDatePlus, setAsyncTimeoutThenExecute, stringInterPolation } from "../helper/functions";
 import { fetchById } from "../helper/request";
 import { useLoader } from "../components/LoaderContext";
+import { fetchMovieFromLocalStorageById, removeMovieFromLocalStorageById, storeMovieToLocalStorageById } from "../helper/storage";
+import { AlertDialog, ActionAlertDialog } from "../components/DialogModel";
+import { MOVIE_STATUS, movieStatusToLabel } from "../helper/enum";
 
 const HeadSub = ({ head, sub }) => {
   return (
@@ -30,10 +32,86 @@ const PageHeader = ({ label }) => {
 const MovieInfoBody = ({ movieId }) => {
   const [movie, setMovie] = useState(null);
   const { startLoader, stopLoader } = useLoader();
+  const [modelIsOpened, setModelIsOpened] = useState(false);
+  const [isInCart,setIsInCart] = useState(true);
 
+  const Dialog = () => {
+  
+    const onAddToCart = () => {
+      storeMovieToLocalStorageById(movie.id)
+      .then( movie =>{
+        stringInterPolation("result of storage: ",movie.price);
+      })
+      .catch(error =>{
+        stringInterPolation("Presented error from storage: ",error)
+      })
+    };
 
-  function fetchMovie(){
+    const onRemoveFromCart = () => {
+      removeMovieFromLocalStorageById(movie.id)
+      .then( movie =>{
+        stringInterPolation("result of storage: ",movie);
+      })
+      .catch(error =>{
+        stringInterPolation("Presented error from storage: ",error)
+      })
+    };
 
+    const AddToCartDialog = () =>{
+      return (
+        <ActionAlertDialog
+            title="Add to cart?"
+            lblRed="Cancel"
+            lblBlue="Yes, add movie"
+            leftAction={false}
+            isOpened={modelIsOpened}
+            onAction={onAddToCart}
+            onClose={() => setModelIsOpened(false)}
+          >
+            <h4>{movie.title}</h4>
+            <p>price: 50.0&#x24;</p>
+            <p>start: {currentDatePlus(0)}</p>
+            <p>end: {currentDatePlus(7)}</p>
+          </ActionAlertDialog>
+      );
+    }
+
+    const AlreadyInCartDialog = () =>{
+      return (
+        <ActionAlertDialog
+            title="Movie already in cart!"
+            lblRed="Remove from cart"
+            lblBlue="OK"
+            leftAction={true}
+            isOpened={modelIsOpened}
+            onAction={onRemoveFromCart}
+            onClose={() => setModelIsOpened(false)}
+            >
+            <h4></h4>
+            <p>Proceed to checkout, then start watching!</p>
+          </ActionAlertDialog>
+      );
+    }
+    
+    return(
+      <div>
+        {isInCart ? <AlreadyInCartDialog/> : <AddToCartDialog/> }
+      </div>
+    )
+    
+  };
+
+  const handlePlayButtonClick = event =>{
+    fetchMovieFromLocalStorageById(movie.id)
+    .then(movie => {
+      stringInterPolation(movie.status,movieStatusToLabel(movie.status))
+      setIsInCart(true);
+      setModelIsOpened(true);
+    })
+    .catch(error =>{
+      setIsInCart(false);
+      setModelIsOpened(true);
+    })
   }
 
   useEffect(() => {
@@ -59,18 +137,11 @@ const MovieInfoBody = ({ movieId }) => {
   
   return (
     <div className="movie-info-body" style={{ backgroundImage: `url(${posterUrl})` }}>
-     
-      <div className="play-button" style={{ zIndex: 2 }}>
+      <Dialog/>
+      <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2 }}>
       <img src="src/images/play.png" alt="Play" />
-     
-      
     </div>
-    
-    
     <div className="overlay"></div>
-    
-    
-    
     <div className="movie-top-header" style={{ zIndex: 2 }}>
       <div className="movie-label">
         

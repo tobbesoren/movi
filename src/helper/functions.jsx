@@ -17,3 +17,14 @@ export const setAsyncTimeoutThenExecute = (cb, timeout = 0) => new Promise(resol
         resolve();
     }, timeout);
 });
+
+export const currentDatePlus = (days)=>{
+    var date = new Date();
+    date.setDate(date.getDate() + days);
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+
+    const newDate = mm + '/' + dd + '/' + yyyy;
+    return newDate;
+}

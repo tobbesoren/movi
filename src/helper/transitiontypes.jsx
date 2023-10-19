@@ -46,7 +46,8 @@ export const routeTransitionSpring = {
         },
     },
   };
-  
+
+   
   export const routeTransitionOpacity = {
     initial: {
       opacity: 0,
