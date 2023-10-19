@@ -41,20 +41,16 @@ const MovieInfoBody = ({ movieId }) => {
     const onAddToCart = () => {
       storeMovieToLocalStorageById(movie.id)
       .then( movie =>{
-        stringInterPolation("result of storage: ",movie.price);
       })
       .catch(error =>{
-        stringInterPolation("Presented error from storage: ",error)
       })
     };
 
     const onRemoveFromCart = () => {
       removeMovieFromLocalStorageById(movie.id)
       .then( movie =>{
-        stringInterPolation("result of storage: ",movie);
       })
       .catch(error =>{
-        stringInterPolation("Presented error from storage: ",error)
       })
     };
 
@@ -103,16 +99,15 @@ const MovieInfoBody = ({ movieId }) => {
   };
 
   const handlePlayButtonClick = event =>{
-    fetchMovieFromLocalStorageById(movie.id)
+    /*fetchMovieFromLocalStorageById(movie.id)
     .then(movie => {
-      stringInterPolation(movie.status,movieStatusToLabel(movie.status))
       setIsInCart(true);
       setModelIsOpened(true);
     })
     .catch(error =>{
       setIsInCart(false);
       setModelIsOpened(true);
-    })
+    })*/
   }
   const [cart, setCart] = useContext(AppContext).shoppingCart;
 
@@ -148,40 +143,38 @@ const MovieInfoBody = ({ movieId }) => {
     <div className="movie-info-body" style={{ backgroundImage: `url(${posterUrl})` }}>
       <Dialog/>
       <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2 }}>
-      <img src="src/images/play.png" alt="Play" />
-    </div>
-    <div className="overlay"></div>
-    <div className="movie-top-header" style={{ zIndex: 2 }}>
-      <div className="movie-label">
-        
-        <label>{movie.overview}</label>
+        <img src="src/images/play.png" alt="Play" />
       </div>
-    </div>
-      <div className="movie-data-grid"style={{ zIndex: 2 }}>
-        <div className="movie-row-left">
-          <HeadSub head="Runtime" sub={movie.runtime} />
-          <HeadSub head="Ranking" sub={movie.vote_average} />
-          <HeadSub head="Revenue" sub={movie.revenue} />
-          <HeadSub head="Release date" sub={movie.release_date} />
-          <HeadSub head="Homepage" sub={movie.homepage} />
-        </div>
-        <div className="movie-row-right">
-    <div className="header-subheader">
-      <h4>Languages</h4>
-      {(movie.spoken_languages && movie.spoken_languages.map(language => <h5 key={Math.random()}>{language.english_name}</h5>))}
-    </div>
-    <div className="header-subheader">
-      <h4>Genre</h4>
-      {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
-    </div>
+      <div className="overlay"></div>
+      <div className="movie-top-header" style={{ zIndex: 2 }}>
+        <div className="movie-label">
           
-       </div>
-       <div className="buttonContainer">
+          <label>{movie.overview}</label>
+        </div>
+      </div>
+      <div className="movie-data-grid"style={{ zIndex: 2 }}>
+          <div className="movie-row-left">
+            <HeadSub head="Runtime" sub={movie.runtime} />
+            <HeadSub head="Ranking" sub={movie.vote_average} />
+            <HeadSub head="Revenue" sub={movie.revenue} />
+            <HeadSub head="Release date" sub={movie.release_date} />
+            <HeadSub head="Homepage" sub={movie.homepage} />
+          </div>
+        <div className="movie-row-right">
+          <div className="header-subheader">
+            <h4>Languages</h4>
+            {(movie.spoken_languages && movie.spoken_languages.map(language => <h5 key={Math.random()}>{language.english_name}</h5>))}
+          </div>
+          <div className="header-subheader">
+            <h4>Genre</h4>
+            {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
+          </div>
+        </div>
+        <div className="buttonContainer">
           <button className="buyBtn" onClick={() => addToCart(movie)} >Buy</button>
-   </div>
-</div>
-
-    </div>
+        </div>     
+      </div>
+  </div>
   )
 }
 

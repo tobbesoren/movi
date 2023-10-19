@@ -44,7 +44,7 @@
 .play-button {
     width: 150px;
     height: 150px;
-    background-image: url('src/images/play.png');
+    background-image: url('../images/play.png');
     background-size: contain;
     background-repeat: no-repeat;
     left: 50%;          /* This combined with transform will center the play button */

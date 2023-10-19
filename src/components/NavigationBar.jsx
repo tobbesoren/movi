@@ -90,10 +90,10 @@ export const NavigationBar = () => {
           <NavLink className="search-button-nav" to="/search" data-page="search" onClick= {(e) => handleCloseMenuAndDoNewSearch()}><button className="search-button"><i className="fa fa-search"></i></button></NavLink>
           }
         </div>
-        <a className={searchFieldIsOpen ? "search-link-disabled" : "search-link"} onClick= {(e) => setSearchFieldIsOpen(true)}><i className="fa fa-search"></i></a>
         <NavLink className="shoppingCart" to="/shoppingcart" data-page="shoppingcart">
           <CartWidget></CartWidget>
         </NavLink>
+        <a className={searchFieldIsOpen ? "search-link-disabled" : "search-link"} onClick= {(e) => setSearchFieldIsOpen(true)}><i className="fa fa-search"></i></a>
         <div ref={ref} className={searchFieldIsOpen ? "container-nav-link-search" : "container-nav-link"}>
           <NavLink className="base-link" to="/popular" data-page="popular" onClick={(e) => handleToggleMenu()}>Popular</NavLink>
           <NavLink className="base-link" to="/categories" data-page="categories" onClick={(e) => handleToggleMenu()}>Categories</NavLink>

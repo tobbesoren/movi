@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function CartWidget({ productsCount }){
     const [productCountClass, setClassName] = useState("productsCountZero")
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
     const navigateToCart = () => {
-    navigate('/showCart')
+    //navigate('/showCart')
   }
     useEffect(() => {
         if (productsCount===undefined){
