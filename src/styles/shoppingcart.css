@@ -1,0 +1,54 @@
+.cart {
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.cartHeader{
+    font-size: 4em;
+}
+
+.cartList {
+    display: flex;
+    flex-direction: column;
+    list-style: none;   
+    align-items: center;
+}
+
+.cartItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cartItemTitle {
+    color: white;
+    font-weight: 700;
+    font-size: 2em;
+    line-height: 20px;
+    margin: .3rem;
+    text-align: center;
+}
+
+.moviePoster{
+    height: auto;
+    width: 15em;
+}
+
+.checkoutSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+.checkout_link{
+    margin-top: 20px;
+}
+.checkout_btn{
+    padding: 20px;
+    background-color: blue;
+    font-size: 2em;
+    font-weight: 600;
+    border-radius: 10px;
+}

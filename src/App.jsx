@@ -9,6 +9,8 @@ import Categories from "./pages/Categories";
 import Popular from "./pages/Popular";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
+import ShoppingCart from './pages/ShoppingCart';
+import Checkout from './pages/Checkout';
 import { AppContext,AppProvider } from "./components/AppContext";
 import "./styles/base.css"
 import { stringInterPolation } from './helper/functions';
@@ -34,11 +36,13 @@ function AppRoutes() {
     <Routes location={location} key="default">
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/shoppingcart" element={<ShoppingCart />} />
       <Route path="/popular" element={<Popular />} />
       <Route path="/categories" element={<Categories />} >
         <Route path=":movieId" element={<Movie />} />
       </Route>
       <Route path="/movie/:movieId" element={<Movie />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
@@ -62,6 +66,7 @@ const AppBody = () =>{
 
 
 function App() {
+
   return (
     <AppProvider>
       <LoaderProvider>

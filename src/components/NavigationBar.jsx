@@ -3,6 +3,7 @@ import React, { useState,useRef,useEffect, useContext, useCallback } from "react
 import '../styles/navbar.css';
 import logo from "../assets/movi-loggo.png"
 import { stringInterPolation } from "../helper/functions";
+import CartWidget from "./CartWidget/CartWidget";
 import { AppContext } from "./AppContext";
 
 function useOutsideClickToClose() {
@@ -90,6 +91,9 @@ export const NavigationBar = () => {
           }
         </div>
         <a className={searchFieldIsOpen ? "search-link-disabled" : "search-link"} onClick= {(e) => setSearchFieldIsOpen(true)}><i className="fa fa-search"></i></a>
+        <NavLink className="shoppingCart" to="/shoppingcart" data-page="shoppingcart">
+          <CartWidget></CartWidget>
+        </NavLink>
         <div ref={ref} className={searchFieldIsOpen ? "container-nav-link-search" : "container-nav-link"}>
           <NavLink className="base-link" to="/popular" data-page="popular" onClick={(e) => handleToggleMenu()}>Popular</NavLink>
           <NavLink className="base-link" to="/categories" data-page="categories" onClick={(e) => handleToggleMenu()}>Categories</NavLink>
