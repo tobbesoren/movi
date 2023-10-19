@@ -25,7 +25,7 @@ export default function CartWidget({ productsCount }){
     useEffect(() => {
         
         setCount(cart[0].length);
-        console.log(count);
+        
         if(count == 0) {
             setClassName("productsCountZero")
         } else {

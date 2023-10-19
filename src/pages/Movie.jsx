@@ -135,8 +135,8 @@ const MovieInfoBody = ({ movieId }) => {
     setCart(prevState => {
       return [...prevState, addedMovie];
     })
-    console.log(cart.map(movie =>
-      movie));
+    // console.log(cart.map(movie =>
+    //   movie));
   }
   
   return (

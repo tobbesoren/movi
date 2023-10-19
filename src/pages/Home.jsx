@@ -16,7 +16,7 @@ const Home = () => {
     const {startLoader, stopLoader} = useLoader();
     const [featuredMovie, setFeaturedMovie] = useState(null);
     
-    //I'll go with the oppenheimer movie for now!
+    //I'll just go with the oppenheimer movie for now!
     const featuredMovieID = `${872585}`;
 
     const getFeaturedMovie = async () => {
@@ -97,7 +97,7 @@ const Home = () => {
   }
 
   const createMovieList = (movies) => {
-    console.log(movies);
+    
     let movieList = [];
     const path = "/movie/";
     movies.forEach(movie => {
