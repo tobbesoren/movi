@@ -39,13 +39,14 @@ const MovieInfoBody = ({ movieId }) => {
   const Dialog = () => {
   
     const onAddToCart = () => {
-      storeMovieToLocalStorageById(movie.id)
+      addToCart(movie);
+      /*storeMovieToLocalStorageById(movie.id)
       .then( movie =>{
         stringInterPolation("result of storage: ",movie.price);
       })
       .catch(error =>{
         stringInterPolation("Presented error from storage: ",error)
-      })
+      })*/
     };
 
     const onRemoveFromCart = () => {
@@ -153,7 +154,6 @@ const MovieInfoBody = ({ movieId }) => {
     <div className="overlay"></div>
     <div className="movie-top-header" style={{ zIndex: 2 }}>
       <div className="movie-label">
-        
         <label>{movie.overview}</label>
       </div>
     </div>
@@ -174,14 +174,10 @@ const MovieInfoBody = ({ movieId }) => {
       <h4>Genre</h4>
       {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
     </div>
-          
-       </div>
-       <div className="buttonContainer">
-          <button className="buyBtn" onClick={() => addToCart(movie)} >Buy</button>
+        
+  </div>
+  </div>
    </div>
-</div>
-
-    </div>
   )
 }
 
@@ -204,3 +200,14 @@ const Movie = () => {
   };
 
 export default Movie;
+
+
+/*
+</div>
+    <div className="buttonContainer">
+      <button className="buyBtn" onClick={() => addToCart(movie)} >Buy</button>
+    </div>
+  </div>
+
+
+*/
