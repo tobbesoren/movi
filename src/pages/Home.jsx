@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useLoader } from "../components/LoaderContext";
 import MovieCard from '../components/MovieCard';
 import { useNavigate } from "react-router-dom";
-
+import { getMoviePrice } from '../helper/functions';
 const Home = () => {
   const navigate = useNavigate();
 
@@ -101,13 +101,13 @@ const Home = () => {
     let movieList = [];
     const path = "/movie/";
     movies.forEach(movie => {
+        movie.price = getMoviePrice(movie);
             const newMovie = MovieCard({movie,path});
             movieList.push(newMovie);
         }
     )
     return movieList;
-}
-  
+}  
   const body = () =>{
 
     return(

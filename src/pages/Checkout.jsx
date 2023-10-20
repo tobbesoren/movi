@@ -5,6 +5,14 @@ import { AppContext } from '../components/AppContext';
 const Checkout = (props) => {
     const [cart, setCart] = useContext(AppContext).shoppingCart;
     const getMovies = () => Object.values(cart || {})
+
+    function getTotalCartPrice(){
+        let total = 0
+        cart.map(movie => {
+            total+=movie.price;
+        })
+        return total;
+    }
     return(
         <section className="checkout">
             <h1 className ="cartHeader">Checkout</h1>
@@ -14,9 +22,11 @@ const Checkout = (props) => {
                     <li className="cartItem" key={movie.id}>
                         <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
                         <h3 className="cartItemTitle">{movie.title}</h3>
+                        <h4 className="cartItemPrice">$ {movie.price}</h4>
                     </li>
                     ))}
                 </ul>
+                <p className="cartTotal">Total: $ {getTotalCartPrice()}</p>
                 <form className="payment">
                     <div className="labelAndInput">
                         <label htmlFor="fname">First name:</label>

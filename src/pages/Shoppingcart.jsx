@@ -5,6 +5,7 @@ import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease
 import { AppContext } from "../components/AppContext"
 import '../styles/shoppingcart.css';
 import moment from "moment"
+import { getMoviePrice } from '../helper/functions';
 
 const ShoppingCart = (props) => {
   const location = useLocation();
@@ -46,27 +47,10 @@ const ShoppingCart = (props) => {
 
   function getTotalPrice() {
     let totalPrice = 0;
-    let today = moment(new Date());
-    let oneMonthAgo = moment(new Date().setMonth(-1));
-    let sixMonthsAgo = moment(new Date().setMonth(-6));
-    let oneYearAgo = moment(new Date().setYear(-1));
-    let twoYearsAgo = moment(new Date().setYear(-2));
-    console.log(today);
 
     getMovies().map(movie => {
-      let movieDate = moment(movie.release_date);
-      if (oneMonthAgo < (movieDate)){
-        totalPrice += 99;
-      }else if (sixMonthsAgo < (movieDate)){
-        totalPrice += 79;
-      }else if (oneYearAgo < (movieDate)){
-        totalPrice += 39;
-      }else if (twoYearsAgo < (movieDate)){
-        totalPrice += 19;
-      }else{
-        totalPrice += 9;
-      }
-      return totalPrice;
+      movie.price = getMoviePrice(movie);
+      totalPrice += movie.price;
     })
     return totalPrice;
   }
@@ -79,8 +63,8 @@ const ShoppingCart = (props) => {
           <li className="cartItem" key={movie.id}>
             <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             <h3 className="cartItemTitle">{movie.title}</h3>
+            <p className="moviePrice">$ {movie.price}</p>
             <button className="fa fa-trash trashButton" onClick={() => {handleRemoveMovie(movie.id)}}></button>
-            <p>{movie.price}</p>
           </li>
         ))}
       </ul>

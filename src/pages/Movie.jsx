@@ -10,6 +10,7 @@ import { AppContext } from "../components/AppContext";
 import { fetchMovieFromLocalStorageById, removeMovieFromLocalStorageById, storeMovieToLocalStorageById } from "../helper/storage";
 import { AlertDialog, ActionAlertDialog } from "../components/DialogModel";
 import { MOVIE_STATUS, movieStatusToLabel } from "../helper/enum";
+import { getMoviePrice } from '../helper/functions';
 
 const HeadSub = ({ head, sub }) => {
   return (
@@ -127,8 +128,9 @@ const MovieInfoBody = ({ movieId }) => {
       }
       setAsyncTimeoutThenExecute(getMovie,100);
   },[movieId])
-
+  
   if(!movie){return null}
+  movie.price = getMoviePrice(movie);
   const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`
   
   const addToCart = (addedMovie) => {
@@ -179,6 +181,10 @@ const MovieInfoBody = ({ movieId }) => {
           <div className="header-subheader">
             <h4>Genre</h4>
             {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
+          </div>
+          <div className="header-subheader">
+            <h4>Price</h4>
+            $ {movie.price}
           </div>
         </div>
             

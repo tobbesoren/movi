@@ -23,3 +23,12 @@
     display: grid;
     margin: 10px;
 }
+
+.cartItemPrice{
+    margin-top: 1px;
+}
+
+.cartTotal{
+    font-size: 1.5em;
+    margin: 1px 1px 5px 1px;
+}
