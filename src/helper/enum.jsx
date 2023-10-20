@@ -49,7 +49,7 @@ export function movieStatusToLabel(movie_status){
 export function genreToLabel(genre){
     switch(GENRE[genre]){
         case GENRE.ACTION: return "Action";
-        case GENRE.ADVENTURE: return "Adventur";
+        case GENRE.ADVENTURE: return "Adventure";
         case GENRE.ANIMATION: return "Animation";
         case GENRE.COMEDY: return "Comedy";
         case GENRE.CRIME: return "Crime";

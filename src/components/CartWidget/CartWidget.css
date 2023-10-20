@@ -12,26 +12,42 @@
 }
   
 .productsCount {
+    display: flex;
+    
+    height: 1em;
+    width: 1em;
+    
     position: absolute;
-    right: 0;
+    right: -1em;
     z-index: 1;
-    font-size: 1.5em;
+    font-size: 1em;
+    font-weight: bold;
+   
+    justify-content: center;
+    align-items: center;
+    
+    
+    
     top: 2px;
-    color: rgb(255, 166, 0);
-    background-color: white;
+
+    /* color: rgb(255, 166, 0); */
+    color: #5271ff;
+    background-color: #ffde59;
     border-radius: 50%;
     padding:3px;
     margin-right: 55px;
 }
 .productsCountZero{
+    
+    display: none;
     position: absolute;
     right: 0;
     z-index: 1;
-    font-size: 1.5em;
+    font-size: 1em;
     top: 2px;
     color: rgb(255, 166, 0);
     background-color: none;
-    border-radius: 50%;
-    padding:3px;
-    margin-right: 55px;
+    border-radius: 100%;
+    /* padding:3px;
+    margin-right: 55px; */
 }

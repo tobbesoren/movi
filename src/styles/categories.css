@@ -22,6 +22,7 @@
 
 
 .container-movies-label{
+    
     width:80%;
     margin-left: 10%;
     margin-top: 20px;
@@ -42,15 +43,17 @@
  
 
 .container-movies{
-    margin-left: 10%;
+    
+    /* margin-left: 10%; */
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     row-gap: 50px;
 }
 
 .container-movie{
-    margin-right: 50px;
+    /* margin-right: 50px; */
+    margin: 10px;
     text-align: left;
 }
 

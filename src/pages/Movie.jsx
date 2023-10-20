@@ -135,8 +135,8 @@ const MovieInfoBody = ({ movieId }) => {
     setCart(prevState => {
       return [...prevState, addedMovie];
     })
-    console.log(cart.map(movie =>
-      movie));
+    // console.log(cart.map(movie =>
+    //   movie));
   }
   
   return (
@@ -145,13 +145,18 @@ const MovieInfoBody = ({ movieId }) => {
       <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2 }}>
         <img src="src/images/play.png" alt="Play" />
       </div>
+      <div className="buttonContainer" style={{ zIndex: 2 }}>
+          <button className="buyButton" onClick={() => addToCart(movie)} >Buy</button>
+      </div> 
       <div className="overlay"></div>
       <div className="movie-top-header" style={{ zIndex: 2 }}>
         <div className="movie-label">
           
           <label>{movie.overview}</label>
         </div>
+        
       </div>
+     
       <div className="movie-data-grid"style={{ zIndex: 2 }}>
           <div className="movie-row-left">
             <HeadSub head="Runtime" sub={movie.runtime} />
@@ -170,10 +175,9 @@ const MovieInfoBody = ({ movieId }) => {
             {(movie.genres && movie.genres.map(genre => <h5 key={Math.random()}>{genre.name}</h5>))}
           </div>
         </div>
-        <div className="buttonContainer">
-          <button className="buyBtn" onClick={() => addToCart(movie)} >Buy</button>
-        </div>     
+            
       </div>
+      
   </div>
   )
 }

@@ -22,6 +22,15 @@ export async function fetchByCategorie(categorie,page) {
     return movieData.results;
 }
 
+export async function fetchByPopularity(page) {
+    // if(!legalSearch(page)){return null}
+    const apiUrlPopular = urlMostPopularWithPage(page);
+    const response = await fetch(apiUrlPopular);
+    const movieData = await response.json();
+    // setLastRequest(genreId,movieData.page,movieData.total_pages,movieData.total_results);
+    return movieData.results;
+}
+
 export async function fetchById(movieID){
     const url = urlWithImdbID(movieID);
     const response = await fetch(url);
@@ -48,6 +57,10 @@ function legalSearch(categorie,page){
 
 function urlWithCategorieAndPage(genreId,page){
     return `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}&sort_by=popularity.desc&page=${page}`
+}
+
+function urlMostPopularWithPage(page){
+    return `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=${page}`
 }
 
 function urlWithImdbID(movieID){
