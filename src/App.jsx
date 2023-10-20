@@ -9,8 +9,9 @@ import Categories from "./pages/Categories";
 import Popular from "./pages/Popular";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
-import ShoppingCart from './pages/ShoppingCart';
+import ShoppingCart from './pages/Shoppingcart';
 import Checkout from './pages/Checkout';
+import Confirm from './pages/Confirmation';
 import { AppContext,AppProvider } from "./components/AppContext";
 import "./styles/base.css"
 import { stringInterPolation } from './helper/functions';
@@ -43,6 +44,7 @@ function AppRoutes() {
       </Route>
       <Route path="/movie/:movieId" element={<Movie />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="/confirm" element={<Confirm />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

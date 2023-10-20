@@ -4,11 +4,19 @@
     justify-content: center;
     align-items: center;
 }
+.paymentForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .inputField{
     padding: 5px;
     width: 200px;
     border-radius: 5px;
     background-color: white;
+    color: black;
+    text-align: left;
 }
 
 .labelAndInput{
