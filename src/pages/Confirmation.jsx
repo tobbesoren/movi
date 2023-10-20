@@ -1,6 +1,7 @@
 import '../styles/confirm.css'; 
 import { useContext } from 'react';
 import { AppContext } from '../components/AppContext';
+import playButton from "/src/images/play.png"
 const Confirm = () => {
     const [cart, setCart] = useContext(AppContext).shoppingCart;
     const getMovies = () => Object.values(cart || {})
@@ -14,7 +15,7 @@ const Confirm = () => {
                 <li className="cartItem" key={movie.id}>
                     <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
                     <h3 className="cartItemTitle">{movie.title}</h3>
-                     <img className="confirm-play-button" src="src/images/play.png" alt="Play" />
+                     <img className="confirm-play-button" src={playButton} alt="Play" />
                 </li>
                 ))}
             </ul>
