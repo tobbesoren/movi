@@ -11,6 +11,7 @@ const ShoppingCart = (props) => {
 
 
   useEffect(() => {
+    console.log(cart)
     window.scrollTo(0, 0)
   }, [location])
 
@@ -44,10 +45,12 @@ const ShoppingCart = (props) => {
 
   const getMovies = () => Object.values(cart || {})
 
-  const totalPrice = getMovies().reduce(
-    (accumulator, movie) => accumulator + movie.price * movie.quantity,
+  const totalPrice = getMovies().map(movie =>
+    (accumulator, movie) => 
+    accumulator + movie.price,
     0
   )
+  
 
   return (
     <section className="cart">
@@ -59,7 +62,6 @@ const ShoppingCart = (props) => {
             <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             <h3 className="cartItemTitle">{movie.title}</h3>
             <p>{movie.price}</p>
-            
           </li>
         ))}
       </ul>
