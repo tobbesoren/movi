@@ -10,6 +10,7 @@ import { NavLink, Outlet} from "react-router-dom";
 import { fetchByCategorie } from "../helper/request";
 import { lastRequest } from "../helper/request";
 import MovieCard from "../components/MovieCard";
+import { getMoviePrice } from '../helper/functions';
 
 
 
@@ -60,6 +61,9 @@ const MoviesByCategorie = ({filterRequest}) =>{
     getMovies()
   },[filterRequest])
   if(movies.length <= 0){return null}
+  movies.map(movie =>{
+    movie.price = getMoviePrice(movie);
+  })
   return (
     <div className="container-body-movies">
       <div className="container-movies-label">
