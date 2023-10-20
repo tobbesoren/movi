@@ -94,6 +94,10 @@ h1{
   
 }
 
+.menu-bar .home-link-disabled{
+  display: none; 
+}
+
 .menu-bar .search-link-disabled{
   display: none;
 }
@@ -105,11 +109,11 @@ h1{
   border: 1px rgb(209, 200, 200) solid;
  
   border-radius: 10px;
-  margin-left: 130px;
+  margin-left: 10px;
   margin-right:50px;
   margin-top: 10px;
-  width: calc(100vw - 250px);
-  min-width: 100px;
+  width: calc(100vw - 145px);
+  min-width: 50px;
   position: relative;
   justify-content: center;
   align-items: center;
@@ -120,9 +124,9 @@ h1{
 }
 
 @-webkit-keyframes run {
-  0% { left: 50%;width: calc(50vw - 244px);}
-  50%{ left : 25%;width:calc(75vw - 250px);}
-  100%{ left: 0%;width: calc(100vw - 250px);}
+  0% { left: 50%;width: calc(50vw - 140px);}
+  50%{ left : 25%;width:calc(75vw - 145px);}
+  100%{ left: 0%;width: calc(100vw - 145px);}
   
 }
 

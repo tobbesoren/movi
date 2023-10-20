@@ -81,7 +81,7 @@ export const NavigationBar = () => {
 
   return (
     <div className={isMenuOpen ? "menu-bar responsive" : "menu-bar"} data-menu-bar id="toggle_button">
-        <NavLink className="home-link" to="/" data-page="home" onClick={(e) => handleCloseMenu()} ><img src={logo}/></NavLink>
+        <NavLink className={searchFieldIsOpen ? "home-link-disabled" : "home-link"} to="/" data-page="home" onClick={(e) => handleCloseMenu()} ><img src={logo}/></NavLink>
         <div className={searchFieldIsOpen ? "search-field" : "search-field-disabled"}>
           <button className="clear-button" onClick={closeSearchField}>&#10060;</button>
           <input onKeyDown={handleEnter} type="text" placeholder="title" value={searchFieldText} onChange={handleInput}></input>
