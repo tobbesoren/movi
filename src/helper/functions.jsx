@@ -39,3 +39,20 @@ export function setNewDate(days){
     const newDate = yyyy + '-' + mm + '-' + dd;
     return newDate;
 }
+
+export function getMoviePrice(movie){
+    let oneMonthAgo = setNewDate(-30);
+    let halfYearAgo = setNewDate(-183);
+    let oneYearAgo = setNewDate(-365);
+    let price = 2;
+    if (oneMonthAgo < movie.release_date ){
+        price = 10;
+    }else if (halfYearAgo < movie.release_date ){
+        price = 6;
+    }else if (oneYearAgo < movie.release_date ){
+        price = 4;
+    }else{
+        price = 2;
+    }
+    return price;
+}

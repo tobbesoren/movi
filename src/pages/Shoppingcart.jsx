@@ -5,6 +5,7 @@ import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease
 import { AppContext } from "../components/AppContext"
 import '../styles/shoppingcart.css';
 import moment from "moment"
+import { getMoviePrice } from '../helper/functions';
 
 const ShoppingCart = (props) => {
   const location = useLocation();
