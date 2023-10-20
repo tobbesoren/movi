@@ -152,11 +152,7 @@ const MovieInfoBody = ({ movieId }) => {
       <Dialog/>
       <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2}}>
 
-      </div>
-      <div className="buttonContainer" style={{ zIndex: 2 }}>
-          <button className="buyButton" onClick={() => addToCart(movie)} >Buy</button>
-      </div> 
-      
+      </div>      
       
       <div className="overlay"></div>
       <div className="movie-top-header" style={{ zIndex: 2 }}>
