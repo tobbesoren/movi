@@ -1,35 +1,45 @@
 .cart {
     padding: 1em;
     margin-top: 1em;
+    
 }
 
 .cartHeader{
-    font-size: 4em;
+    font-size: 2em;
 }
 
 .cartList {
+    margin: 0px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     list-style: none;   
     align-items: center;
+    justify-content: center;
+    
+    
 }
 
 .cartItem{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    
+    
 }
 
 .cartItemTitle {
     color: white;
     font-weight: 700;
-    font-size: 2em;
+    font-size: 1.5em;
     line-height: 20px;
     margin: .3rem;
     text-align: center;
 }
 
 .moviePoster{
+    border-radius: 8px;
     height: auto;
     width: 15em;
 }
@@ -57,10 +67,9 @@
     height: 4em;
     top: 1em;
     background-color:#5271ff;
-    color: #ffde59;
+    color: white;
     border-radius: 8px;
     position: relative;
-    z-index: 3;
     left: 50%;
     transform: translateX(-50%);
 }

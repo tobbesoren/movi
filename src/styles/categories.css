@@ -53,11 +53,13 @@
 
 .container-movie{
     /* margin-right: 50px; */
+    
     margin: 10px;
     text-align: left;
 }
 
 .container-movie img{
+    border-radius: 5px;
     cursor: pointer;
     width: 200px;
     height: auto;
@@ -81,5 +83,11 @@ h3{
     background-color: #007AFF;
     border-radius: 10px;
     font-weight: 500;
+}
+
+@media only screen and (max-width: 500px) {
+    .container-movie img{
+        width: 100%;
+    }
 }
 
