@@ -1,0 +1,11 @@
+.thankYou{
+    color: white;
+    font-size: 5em;
+    text-align: center;
+}
+
+.confirm-play-button {
+   width: 100px;
+   height: 100px;
+   object-fit: cover;
+}
