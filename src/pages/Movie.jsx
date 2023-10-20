@@ -150,12 +150,8 @@ const MovieInfoBody = ({ movieId }) => {
   return (
     <div className="movie-info-body" style={{ backgroundImage: `url(${posterUrl})` }}>
       <Dialog/>
-      <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2 }}>
-        <img src="src/images/play.png" alt="Play" />
-      </div>
-      <div className="buttonContainer" style={{ zIndex: 2 }}>
-          <button className="buyButton" onClick={() => addToCart(movie)} >Buy</button>
-      </div> 
+      
+      
       <div className="overlay"></div>
       <div className="movie-top-header" style={{ zIndex: 2 }}>
         <div className="movie-label">
@@ -173,6 +169,9 @@ const MovieInfoBody = ({ movieId }) => {
             <HeadSub head="Release date" sub={movie.release_date} />
             <HeadSub head="Homepage" sub={movie.homepage} />
           </div>
+          <div className="buttonContainer" style={{ zIndex: 2 }}>
+          <button className="buyButton" onClick={() => addToCart(movie)} >BUY NOW</button>
+      </div> 
         <div className="movie-row-right">
           <div className="header-subheader">
             <h4>Languages</h4>

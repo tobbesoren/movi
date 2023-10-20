@@ -54,13 +54,15 @@
     
 }
 .buyButton {
-    width: 5em;
-    height: 2.5em;
+    width: 7em;
+    height: 2em;
     top: 1em;
-    background-color: #5271ff;
-    color: white;
-    border-radius: 8px;
-    position: relative;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    background-color: #ffe248;
+    color: rgb(0, 0, 0);
+    border-radius: 25px;
+    position: absolute;
     z-index: 3;
     left: 50%;
     transform: translateX(-50%);
