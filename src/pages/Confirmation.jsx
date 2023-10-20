@@ -1,7 +1,7 @@
 import '../styles/confirm.css'; 
 import { useContext } from 'react';
 import { AppContext } from '../components/AppContext';
-const Confirm = (props) => {
+const Confirm = () => {
     const [cart, setCart] = useContext(AppContext).shoppingCart;
     const getMovies = () => Object.values(cart || {})
     return(

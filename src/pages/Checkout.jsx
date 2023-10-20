@@ -2,7 +2,7 @@ import '../styles/checkout.css';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { AppContext } from '../components/AppContext';
-const Checkout = (props) => {
+const Checkout = () => {
     const [cart, setCart] = useContext(AppContext).shoppingCart;
     const getMovies = () => Object.values(cart || {})
 
