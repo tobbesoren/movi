@@ -51,6 +51,7 @@ const ShoppingCart = (props) => {
     let totalPrice = 0;
 
     getMovies().map(movie => {
+      movie.price = getMoviePrice(movie);
       totalPrice += movie.price;
     })
     return totalPrice;
