@@ -6,6 +6,7 @@ import fallback from "../images/Yoyo_Cinema_Logo.png";
 import { stringInterPolation } from '../helper/functions';
 import { AppContext } from '../components/AppContext';
 import MovieCard from "../components/MovieCard";
+import { getMoviePrice } from '../helper/functions';
 
 
 let lastFetch ={
@@ -71,6 +72,7 @@ const Search = () => {
         let movieList = [];
         const path = "/movie/";
         movies.forEach(movie => {
+                movie.price = getMoviePrice(movie);
                 const newMovie = MovieCard({movie,path});
                 movieList.push(newMovie);
             }
