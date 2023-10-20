@@ -56,19 +56,7 @@ const ShoppingCart = (props) => {
     console.log(today);
 
     getMovies().map(movie => {
-      let movieDate = moment(movie.release_date);
-      if (oneMonthAgo < (movieDate)){
-        totalPrice += 99;
-      }else if (sixMonthsAgo < (movieDate)){
-        totalPrice += 79;
-      }else if (oneYearAgo < (movieDate)){
-        totalPrice += 39;
-      }else if (twoYearsAgo < (movieDate)){
-        totalPrice += 19;
-      }else{
-        totalPrice += 9;
-      }
-      return totalPrice;
+      totalPrice += movie.price;
     })
     return totalPrice;
   }

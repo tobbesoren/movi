@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useLoader } from "../components/LoaderContext";
 import MovieCard from '../components/MovieCard';
 import { useNavigate } from "react-router-dom";
-
+import { setNewDate } from '../helper/functions';
 const Home = () => {
   const navigate = useNavigate();
 
@@ -101,13 +101,24 @@ const Home = () => {
     let movieList = [];
     const path = "/movie/";
     movies.forEach(movie => {
+        let oneMonthAgo = setNewDate(-30);
+        let halfYearAgo = setNewDate(-183);
+        let oneYearAgo = setNewDate(-365);
+        if (oneMonthAgo < movie.release_date ){
+          movie.price = 10;
+        }else if (halfYearAgo < movie.release_date ){
+          movie.price = 6;
+        }else if (oneYearAgo < movie.release_date ){
+          movie.price = 4;
+        }else{
+          movie.price = 2;
+        }
             const newMovie = MovieCard({movie,path});
             movieList.push(newMovie);
         }
     )
     return movieList;
-}
-  
+}  
   const body = () =>{
 
     return(

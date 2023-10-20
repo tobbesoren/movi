@@ -28,3 +28,14 @@ export const currentDatePlus = (days)=>{
     const newDate = mm + '/' + dd + '/' + yyyy;
     return newDate;
 }
+
+export function setNewDate(days){
+    var date = new Date();
+    date.setDate(date.getDate() + days);
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+
+    const newDate = yyyy + '-' + mm + '-' + dd;
+    return newDate;
+}

@@ -10,6 +10,7 @@ const MovieCard = ({movie,path}) =>{
           <NavLink className="movie-nav-link" to={nav} data-page="movie-info" state={{ movieId: movie.id }} style={{ textDecoration: 'none' }} >
             <AsyncImage className="movie-poster" src={movieImgURL}/>
           </NavLink>
+          <p>$ {movie.price}</p>
         </div>
     )
   }
