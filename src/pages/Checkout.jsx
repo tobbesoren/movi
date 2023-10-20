@@ -13,6 +13,11 @@ const Checkout = (props) => {
         })
         return total;
     }
+
+    const emptyCart = () => {
+        setCart([]);
+      }
+
     return(
         <section className="checkout">
             <h1 className ="cartHeader">Checkout</h1>
@@ -45,7 +50,7 @@ const Checkout = (props) => {
                         <input className="inputField" type="text" id="cvv" name="cvv"></input>
                     </div>
                     <NavLink className="checkout_link" to="/confirm" data-page="confirm">
-                        <button className="checkout_btn">Place order</button>
+                        <button className="checkout_btn" onClick={() => {emptyCart()}}>Place order</button>
                     </NavLink>
                 </form>
             </div>

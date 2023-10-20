@@ -70,7 +70,7 @@ const ShoppingCart = (props) => {
       </ul>
       <div className="checkoutSection">Total amount to pay {getTotalPrice()} $
       <NavLink className="checkout_link" to="/checkout" data-page="checkout">
-        <button className="checkout_btn">Checkout</button>
+        <button className="checkout_btn" >Checkout</button>
       </NavLink>
       </div>
     </section>
