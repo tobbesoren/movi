@@ -17,11 +17,9 @@ const ShoppingCart = (props) => {
   }, [location])
 
   const handleRemoveMovie = movieId => {
-    setCart(prevCart => {
-      const updatedCart = { ...prevCart }
-      delete updatedCart[movieId]
-      return updatedCart
-    })
+    let newCart = [cart][0];
+    newCart = newCart.filter(item => item.id !==movieId);
+    setCart(newCart);
   }
 
   const handleUpdateQuantity = (movieId, operation) => {
@@ -81,6 +79,7 @@ const ShoppingCart = (props) => {
           <li className="cartItem" key={movie.id}>
             <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             <h3 className="cartItemTitle">{movie.title}</h3>
+            <button className="fa fa-trash trashButton" onClick={() => {handleRemoveMovie(movie.id)}}></button>
             <p>{movie.price}</p>
           </li>
         ))}

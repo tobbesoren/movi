@@ -73,3 +73,9 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+.trashButton {
+    color: white;
+    background-color: black;
+    border-radius: 5px;;
+}
