@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom"
 import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease"
 import { AppContext } from "../components/AppContext"
 import '../styles/shoppingcart.css';
+import moment from "moment"
 
 const ShoppingCart = (props) => {
   const location = useLocation();
@@ -45,13 +46,32 @@ const ShoppingCart = (props) => {
 
   const getMovies = () => Object.values(cart || {})
 
-  const totalPrice = getMovies().map(movie =>
-    (accumulator, movie) => 
-    accumulator + movie.price,
-    0
-  )
-  
+  function getTotalPrice() {
+    let totalPrice = 0;
+    let today = moment(new Date());
+    let oneMonthAgo = moment(new Date().setMonth(-1));
+    let sixMonthsAgo = moment(new Date().setMonth(-6));
+    let oneYearAgo = moment(new Date().setYear(-1));
+    let twoYearsAgo = moment(new Date().setYear(-2));
+    console.log(today);
 
+    getMovies().map(movie => {
+      let movieDate = moment(movie.release_date);
+      if (oneMonthAgo < (movieDate)){
+        totalPrice += 99;
+      }else if (sixMonthsAgo < (movieDate)){
+        totalPrice += 79;
+      }else if (oneYearAgo < (movieDate)){
+        totalPrice += 39;
+      }else if (twoYearsAgo < (movieDate)){
+        totalPrice += 19;
+      }else{
+        totalPrice += 9;
+      }
+      return totalPrice;
+    })
+    return totalPrice;
+  }
   return (
     <section className="cart">
       <h1 className="cartHeader">Your shoppingcart</h1>
@@ -65,7 +85,7 @@ const ShoppingCart = (props) => {
           </li>
         ))}
       </ul>
-      <div className="checkoutSection">Total amount to pay {totalPrice} $
+      <div className="checkoutSection">Total amount to pay {getTotalPrice()} $
       <NavLink className="checkout_link" to="/checkout" data-page="checkout">
         <button className="checkout_btn">Checkout</button>
       </NavLink>
