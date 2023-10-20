@@ -132,11 +132,17 @@ const MovieInfoBody = ({ movieId }) => {
   const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`
   
   const addToCart = (addedMovie) => {
-    setCart(prevState => {
-      return [...prevState, addedMovie];
+    let alreadyInCart = false;
+    cart.map(movie => {
+      if (movie.id === addedMovie.id){
+        alreadyInCart = true;
+      }
     })
-    // console.log(cart.map(movie =>
-    //   movie));
+    if (!alreadyInCart){
+      setCart(prevState => {
+        return [...prevState, addedMovie];
+      })
+    }
   }
   
   return (
