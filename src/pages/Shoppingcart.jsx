@@ -49,12 +49,6 @@ const ShoppingCart = (props) => {
 
   function getTotalPrice() {
     let totalPrice = 0;
-    let today = moment(new Date());
-    let oneMonthAgo = moment(new Date().setMonth(-1));
-    let sixMonthsAgo = moment(new Date().setMonth(-6));
-    let oneYearAgo = moment(new Date().setYear(-1));
-    let twoYearsAgo = moment(new Date().setYear(-2));
-    console.log(today);
 
     getMovies().map(movie => {
       totalPrice += movie.price;
@@ -70,7 +64,7 @@ const ShoppingCart = (props) => {
           <li className="cartItem" key={movie.id}>
             <img className="moviePoster" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
             <h3 className="cartItemTitle">{movie.title}</h3>
-            <p>{movie.price}</p>
+            <p className="moviePrice">$ {movie.price}</p>
           </li>
         ))}
       </ul>
