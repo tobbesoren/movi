@@ -40,13 +40,13 @@
 }
 .productsCountZero{
     
-    display: none;
+    /* display: none; */
     position: absolute;
     right: 0;
     z-index: 1;
     font-size: 1em;
     top: 2px;
-    color: rgb(255, 166, 0);
+    color: black;
     background-color: none;
     border-radius: 100%;
     /* padding:3px;
