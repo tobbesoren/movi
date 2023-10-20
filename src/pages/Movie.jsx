@@ -150,8 +150,8 @@ const MovieInfoBody = ({ movieId }) => {
   return (
     <div className="movie-info-body" style={{ backgroundImage: `url(${posterUrl})` }}>
       <Dialog/>
-      <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2 }}>
-        <img src="src/images/play.png" alt="Play" />
+      <div className="play-button" onClick={handlePlayButtonClick} style={{ zIndex: 2}}>
+
       </div>
       <div className="buttonContainer" style={{ zIndex: 2 }}>
           <button className="buyButton" onClick={() => addToCart(movie)} >Buy</button>
