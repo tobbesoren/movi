@@ -18,7 +18,8 @@
     width: auto;
     height: 1200px;
     position: relative;
-    background-size: contain; 
+    background-size: contain;
+    margin-bottom: 3em;
     
 }
 
