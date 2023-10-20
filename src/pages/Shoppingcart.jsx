@@ -1,13 +1,10 @@
 import { useEffect, useContext } from "react"
-import useLocalStorageState from "use-local-storage-state"
 import { NavLink, useLocation } from "react-router-dom"
-import Increase_Decrease from "../components/Increase_Decrease/Increase_Decrease"
 import { AppContext } from "../components/AppContext"
 import '../styles/shoppingcart.css';
-import moment from "moment"
 import { getMoviePrice } from '../helper/functions';
 
-const ShoppingCart = (props) => {
+const ShoppingCart = () => {
   const location = useLocation();
   const [cart, setCart] = useContext(AppContext).shoppingCart;
 
@@ -21,26 +18,6 @@ const ShoppingCart = (props) => {
     let newCart = [cart][0];
     newCart = newCart.filter(item => item.id !==movieId);
     setCart(newCart);
-  }
-
-  const handleUpdateQuantity = (movieId, operation) => {
-    setCart(prevCart => {
-      const updatedCart = { ...prevCart }
-      if (updatedCart[movieId]) {
-        if (operation === "increase") {
-          updatedCart[movieId] = {
-            ...updatedCart[movieId],
-            quantity: updatedCart[movieId].quantity + 1
-          }
-        } else {
-          updatedCart[movieId] = {
-            ...updatedCart[movieId],
-            quantity: updatedCart[movieId].quantity - 1
-          }
-        }
-      }
-      return updatedCart
-    })
   }
 
   const getMovies = () => Object.values(cart || {})

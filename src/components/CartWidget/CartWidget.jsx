@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import shoppingCart from '../../assets/shopping-cart.svg'
 import "./CartWidget.css"
 import { useNavigate } from "react-router-dom";
-import { stringInterPolation } from "../../helper/functions";
 import { AppContext } from "../AppContext";
 
 export default function CartWidget({ productsCount }){
